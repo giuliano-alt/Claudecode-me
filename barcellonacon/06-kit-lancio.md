@@ -65,7 +65,7 @@ Con l'archivio del vecchio piano (clip barca/club già girate) le sessioni A e B
 
 | Giorno | Reel | Keyword | Angolo | Durata |
 |---|---|---|---|---|
-| 1 | Con 35€ | `35` | Prezzo / valore | ~25" |
+| 1 | Con 35€ | `PASS` | Contrarian / prezzo | ~28" |
 | 2 | Boat Party | `BARCA` | Desiderio / scarsità | ~22" |
 | 3 | Jetski | `JET` | Curiosità / adrenalina | ~24" |
 | 4 | Settimana perfetta | `ESTATE` | Utilità / offerta-urgenza | ~27" |
@@ -74,19 +74,19 @@ Le keyword diverse per video = attribuzione gratuita: dai DM si capisce quale re
 
 ## 5. Risposte DM salvate (risposta entro 10 minuti)
 
-- **`35`** → `Ciao! 🎟️ Due cose e siamo a posto: che date siete a Barcellona e in quanti? Vi blocco i braccialetti e vi mando il programma sera per sera.`
+- **`PASS`** → `Ciao! 🎟️ Due cose e siamo a posto: che date siete a Barcellona e in quanti? Vi blocco i braccialetti e vi mando il programma sera per sera. Info utili: ingresso ogni sera entro l'1:00, braccialetto personale.`
 - **`BARCA`** → `Ciao! ⛵ Dimmi date e quanti siete: controllo i posti sulla barca e te li blocco subito. Partenza ore 18 dal Porto Olimpico, 3 cocktail inclusi, rientro alle 21.`
 - **`JET`** → `Ciao! 🌊 Dimmi giorno preferito e quanti siete: ti mando gli orari liberi e vi blocco le moto. 30 minuti, si va in 2 per moto, niente patente. Da 6 persone in su: 45€ a testa.`
-- **`ESTATE`** → `Ciao! 🔥 Rientrate nei primi 20: [incentivo] è vostro. Mandami date e quanti siete e vi preparo la settimana completa: pass 6 club + barca + jetski, già prenotato, gratis e senza impegno.`
-- **Messaggio 2 universale (dopo che rispondono con date+numero)** → `Perfetto! Per le vostre date: barca al tramonto il [giorno], jetski il [giorno], pass per i sei club tutta la settimana. Ti mando dettagli e prezzi qui — vi blocco i posti?`
+- **`ESTATE`** → `Ciao! 🔥 Rientrate nei primi 20: [incentivo] è vostro. Mandami date e quanti siete e vi preparo la settimana completa: pass 5 club + barca + jetski, già prenotato, gratis e senza impegno.`
+- **Messaggio 2 universale (dopo che rispondono con date+numero)** → `Perfetto! Per le vostre date: barca al tramonto il [giorno], jetski il [giorno], pass per i cinque club tutta la settimana. Ti mando dettagli e prezzi qui — vi blocco i posti?`
 
 ## 6. Checklist operativa
 
 ### Prima del Giorno 1
 
 - [ ] Profilo pronto: nome "BarcellonaCon" + display name con "Barcellona" dentro, bio con CTA date, foto riconoscibile (vedi analisi §7)
-- [ ] **Allineare "5 club partner" vs "6 club" tra le due locandine** (i commenti lo noteranno)
-- [ ] Prezzo "ingresso singolo 20–25€" verificato e difendibile (prima obiezione nei commenti del Reel 1)
+- [ ] **Correggere la locandina prezzo che dice "6 CLUB"**: deciso "5 club" ovunque (script, overlay, DM)
+- [ ] Verificare che i braccialetti/posti settimanali siano davvero limitati (la CTA del Reel 1 dice "stanno finendo": mai scarsità inventata)
 - [ ] Le 4 risposte DM salvate caricate su TikTok e Instagram
 - [ ] Archivio b-roll completo (sessioni A e B fatte)
 - [ ] Incentivo "primi 20 gruppi" concordato col team: sostenibile (posti riservati o lista garantita, non sconti inventati)

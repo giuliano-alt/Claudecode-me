@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Prodotto** | Tutto l'ecosistema: pass 6 club + boat party + jetski, venduto come "settimana già organizzata" |
+| **Prodotto** | Tutto l'ecosistema: pass 5 club + boat party + jetski, venduto come "settimana già organizzata" |
 | **Angolo** | **Save-bait** (itinerario da salvare: il salvataggio è il segnale algoritmico più forte su questa nicchia) + chiusura con offerta a scarsità |
 | **Keyword DM** | `ESTATE` |
 | **Durata target** | 27 secondi |
@@ -34,4 +34,4 @@
 
 - **Caption**: `Salvatelo per quando prenotate ✈️📌 La settimana a Barcellona sera per sera — e noi ve la organizziamo gratis intorno alle vostre date. "ESTATE" in DM (solo i primi 20 gruppi). #barcellona #estate2026 #vacanze #viaggi #itinerario`
 - **Commento fissato**: `"ESTATE" in DM con date e quanti siete: i primi 20 gruppi hanno [incentivo]. Rispondiamo entro 10 minuti ⏱️`
-- **Risposta DM salvata (keyword `ESTATE`)**: `Ciao! 🔥 Rientrate nei primi 20: [incentivo] è vostro. Mandami date e quanti siete e vi preparo la settimana completa: pass 6 club + barca + jetski, già prenotato, gratis e senza impegno.`
+- **Risposta DM salvata (keyword `ESTATE`)**: `Ciao! 🔥 Rientrate nei primi 20: [incentivo] è vostro. Mandami date e quanti siete e vi preparo la settimana completa: pass 5 club + barca + jetski, già prenotato, gratis e senza impegno.`

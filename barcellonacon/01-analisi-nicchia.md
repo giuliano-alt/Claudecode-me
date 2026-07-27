@@ -45,7 +45,7 @@ Il formato firma della pagina ("Cosa fai a Barcellona con XXX€") è fortissimo
 
 | Prodotto | Il prezzo è l'arma migliore? | Hook scelto |
 |---|---|---|
-| Full Pass 35€ / 7 notti | **Sì, devastante** (35€ < 1 ingresso singolo ~20–25€) | **Formato firma**: "Cosa ci fai con 35€ a Barcellona?" — è il video-manifesto che dà il nome alla pagina |
+| Full Pass 35€ / 7 notti | **Sì, devastante** (5€ a serata) | **Formato firma in versione contrarian**: "Tutti dicono che Barcellona è cara. Sicuri?" — è il video-manifesto che dà il nome alla pagina |
 | Boat Party 65€ | No: 65€ è il prodotto *più caro*. Aprire col prezzo lo indebolisce | **Cold open sensoriale + FOMO**: si apre sul momento più bello (brindisi al tramonto sul drop), il prezzo arriva a metà video, quando il desiderio è già montato |
 | Jetski 45–50€ | A metà: il prezzo sorprende, ma l'immagine sorprende di più | **Curiosity gap + azione**: "senza patente" come gancio, prezzo come *reveal* finale (payoff, non hook) |
 | Programma settimanale | No: qui l'arma è l'utilità | **Save-bait**: "il programma che ti salvi" + urgenza sull'offerta in chiusura |
@@ -81,6 +81,6 @@ Perché questo mix è la scelta giusta per l'engagement:
 
 ## 8. Note di coerenza sui materiali (da sistemare prima di girare)
 
-- La locandina prezzo dice **"6 club"**, quella del programma settimanale dice **"5 club partner"** (Carpediem CDLC, Twenties, Downtown, Sutton, La Biblio). Negli script uso "sei club" (coerente con locandina prezzo e col vecchio piano v3), ma **va allineato prima della pubblicazione**: i commenti di TikTok notano *tutto*, e un'incongruenza sul numero diventa il commento più votato.
-- Prezzo di riferimento "ingresso singolo 20–25€" usato nel Reel 1: verificare che sia difendibile per i club partner in quella settimana (sarà la prima obiezione nei commenti — ed è un'obiezione che ci fa comodo, se la risposta è pronta).
+- ~~Incongruenza locandine "6 club" vs "5 club partner"~~ → **risolto: deciso "5 club" ovunque** (script, overlay, DM). Resta da correggere la locandina prezzo che dice "6 CLUB" prima della pubblicazione.
+- Il Reel 1 non cita più il prezzo dell'ingresso singolo altrui (frase attaccabile nei commenti): i conti si fanno solo sul nostro prezzo (35€ ÷ 7 = 5€ a serata). Il confronto con l'ingresso pieno vive nelle risposte pronte ai commenti (vedi script Reel 1).
 - Bunkers del Carmel (usato come location alternativa nel Reel 4): dal 2024 la spianata è stata recintata e l'accesso serale è limitato. **Verificare gli orari attuali sul posto**; in caso, girare nel tardo pomeriggio o usare l'alternativa indicata nello script.
