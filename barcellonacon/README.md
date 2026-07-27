@@ -19,7 +19,7 @@ Il concept della pagina: *"Cosa puoi fare a Barcellona con XXX€"*. Il formato 
 
 | Giorno | Reel | Angolo | Keyword DM | Durata |
 |---|---|---|---|---|
-| 1 | Con 35€ (Full Pass) | Contrarian + prezzo-shock | `PASS` | ~28" |
+| 1 | Con 35€ (Full Pass) | Contrarian + prezzo-shock + giveaway | `PASS` | ~29" |
 | 2 | Boat Party | Desiderio / scarsità | `BARCA` | ~22" |
 | 3 | Jetski | Adrenalina / curiosità | `JET` | ~24" |
 | 4 | La settimana perfetta | Utilità / offerta-urgenza | `ESTATE` | ~27" |

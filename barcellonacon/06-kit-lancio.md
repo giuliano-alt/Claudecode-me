@@ -65,7 +65,7 @@ Con l'archivio del vecchio piano (clip barca/club già girate) le sessioni A e B
 
 | Giorno | Reel | Keyword | Angolo | Durata |
 |---|---|---|---|---|
-| 1 | Con 35€ | `PASS` | Contrarian / prezzo | ~28" |
+| 1 | Con 35€ | `PASS` (+ giveaway tag 3 amici) | Contrarian / prezzo | ~29" |
 | 2 | Boat Party | `BARCA` | Desiderio / scarsità | ~22" |
 | 3 | Jetski | `JET` | Curiosità / adrenalina | ~24" |
 | 4 | Settimana perfetta | `ESTATE` | Utilità / offerta-urgenza | ~27" |
@@ -86,7 +86,7 @@ Le keyword diverse per video = attribuzione gratuita: dai DM si capisce quale re
 
 - [ ] Profilo pronto: nome "BarcellonaCon" + display name con "Barcellona" dentro, bio con CTA date, foto riconoscibile (vedi analisi §7)
 - [ ] **Correggere la locandina prezzo che dice "6 CLUB"**: deciso "5 club" ovunque (script, overlay, DM)
-- [ ] Verificare che i braccialetti/posti settimanali siano davvero limitati (la CTA del Reel 1 dice "stanno finendo": mai scarsità inventata)
+- [ ] Giveaway Reel 1 pronto: premio approvato col team (2 Full Pass), data estrazione fissata, disclaimer "non affiliato a TikTok/Instagram" in caption, estrazione da filmare in stories col vincitore taggato
 - [ ] Le 4 risposte DM salvate caricate su TikTok e Instagram
 - [ ] Archivio b-roll completo (sessioni A e B fatte)
 - [ ] Incentivo "primi 20 gruppi" concordato col team: sostenibile (posti riservati o lista garantita, non sconti inventati)
