@@ -14,6 +14,7 @@ Il concept della pagina: *"Cosa puoi fare a Barcellona con XXX€"*. Il formato 
 | [04-reel-3-jetski.md](04-reel-3-jetski.md) | **Reel 3 — Jetski** · POV adrenalina con price reveal finale |
 | [05-reel-4-settimana.md](05-reel-4-settimana.md) | **Reel 4 — "La settimana perfetta"** · itinerario salvabile + offerta/urgenza |
 | [06-kit-lancio.md](06-kit-lancio.md) | Testi pronti (caption, commenti fissati, risposte DM), piano riprese unificato, mappa location, checklist operativa |
+| [07-reel-tossa-de-mar.md](07-reel-tossa-de-mar.md) | **Reel escursione — Tossa de Mar** · reel parlato per riempire il bus di mercoledì 5 agosto (fuori dal ciclo di lancio) |
 
 ## Ordine di pubblicazione (4 giorni consecutivi, ore 18:00–19:00 italiane)
 
