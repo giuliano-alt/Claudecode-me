@@ -23,11 +23,13 @@ function statoClass(s) {
 }
 
 function renderTable(spec) {
-  const cls = ['dt', spec.small ? 'sm' : '', spec.head ? '' : 'nohead'].filter(Boolean).join(' ');
+  const cls = ['dt', spec.small ? 'sm' : '', spec.head ? '' : 'nohead',
+               spec.long ? 'lg' : ''].filter(Boolean).join(' ');
   const cg = '<colgroup>' + spec.cols.map(f => `<col style="width:${(f * 100).toFixed(2)}%">`).join('') + '</colgroup>';
+  const ha = spec.headAlign || spec.align || [];
   const th = spec.head
     ? '<thead><tr>' + spec.head.map((h, i) =>
-        `<th class="${(spec.align || [])[i] || ''}">${inline(h)}</th>`).join('') + '</tr></thead>'
+        `<th class="${ha[i] || ''}">${inline(h)}</th>`).join('') + '</tr></thead>'
     : '';
   const tb = '<tbody>' + spec.rows.map(r => '<tr>' + r.map((c, i) => {
     const a = (spec.align || [])[i] || '';
@@ -209,8 +211,8 @@ table.dt.nohead td:first-child{background:var(--zebra)}
   .wrap{padding:18px 14px 60px}
   body{font-size:16px}
   p,li{text-align:left}
-  .landscape .cards{display:block}
-  .landscape .tw{display:none}
+  .cards{display:block}
+  .cards + .tw{display:none}   /* la tabella cede il posto alle schede solo se esistono */
   .meta div{flex-direction:column; gap:2px}
   .meta dt,.meta b{flex:none}
   table.dt{min-width:430px; font-size:.82rem}
@@ -247,6 +249,9 @@ table.dt.nohead td:first-child{background:var(--zebra)}
   .cards{display:none !important}
   .tw{overflow:visible; display:block !important}
   table.dt{min-width:0 !important; width:100%; font-size:8.4pt; page-break-inside:avoid}
+  /* le tabelle lunghe devono poter spezzarsi, altrimenti sprecano una pagina intera */
+  table.dt.lg{page-break-inside:auto; break-inside:auto}
+  table.dt.lg thead{display:table-header-group}
   table.dt.sm{font-size:7.8pt}
   table.dt th{font-size:8pt; font-family:Arial,Helvetica,sans-serif; padding:4pt 4pt;
               -webkit-print-color-adjust:exact; print-color-adjust:exact}

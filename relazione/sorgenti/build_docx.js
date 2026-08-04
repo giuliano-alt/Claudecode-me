@@ -50,6 +50,7 @@ function tableOf(spec, width) {
   cols[cols.length - 1] += width - cols.reduce((a, b) => a + b, 0); // arrotondamento
   const size = spec.small ? 16 : 17;
   const trs = [];
+  const ha = spec.headAlign || spec.align || [];
   if (spec.head) {
     trs.push(new TableRow({
       tableHeader: true,
@@ -60,7 +61,7 @@ function tableOf(spec, width) {
         margins: { top: 70, bottom: 70, left: 100, right: 100 },
         borders: { top: thin(NAVY), bottom: thin(NAVY), left: thin(NAVY), right: thin(NAVY) },
         children: [new Paragraph({
-          alignment: A[(spec.align || [])[i]] || AlignmentType.LEFT,
+          alignment: A[ha[i]] || AlignmentType.LEFT,
           spacing: { after: 0, line: 240 },
           children: [t(h, { font: HEAD, size: size - 1, bold: true, color: 'FFFFFF' })]
         })]
