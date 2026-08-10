@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { meta, blocks } = require('./report.js');
+const { meta, blocks } = require(process.argv[3] || './report.js');
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -270,7 +270,7 @@ table.dt.nohead td:first-child{background:var(--zebra)}
 <body>
 <div class="wrap">
 
-<header class="cover">
+${meta.bare ? '' : `<header class="cover">
   <div class="ente">${esc(meta.ente)}</div>
   <div class="prog">${esc(meta.progetto)}</div>
   <h1>${esc(meta.titolo)}</h1>
@@ -285,7 +285,7 @@ table.dt.nohead td:first-child{background:var(--zebra)}
 <nav class="toc">
   <h3>Indice</h3>
   <ol>${toc}</ol>
-</nav>
+</nav>`}
 
 <main>
 ${html}

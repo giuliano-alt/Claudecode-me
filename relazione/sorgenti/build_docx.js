@@ -5,7 +5,7 @@ const {
   Footer, PageNumber, LevelFormat, VerticalAlign
 } = require('docx');
 
-const { meta, blocks } = require('./report.js');
+const { meta, blocks } = require(process.argv[3] || './report.js');
 
 const NAVY = '1F3864', ACCENT = '2E5C8A', RULE = 'B4C3D8', ZEBRA = 'F1F5FA', FLAG = 'B45309';
 const BODY = 'Times New Roman', HEAD = 'Arial';
@@ -181,8 +181,8 @@ for (const b of blocks) {
 }
 parts.push(cur);
 
-/* ---- copertina e indice ---- */
-const cover = [
+/* ---- copertina e indice (omesse se meta.bare) ---- */
+const cover = meta.bare ? [] : [
   new Paragraph({ spacing: { after: 0 }, alignment: AlignmentType.CENTER,
     children: [t(meta.ente, { font: HEAD, size: 24, bold: true, color: NAVY })] }),
   new Paragraph({ spacing: { after: 700, before: 60 }, alignment: AlignmentType.CENTER,

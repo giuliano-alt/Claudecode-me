@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relazione servizio orientamento al lavoro — SAI PROG-684-PR Santa Elisabetta 2026</title>
+<style>
+:root{
+  --navy:#1F3864; --accent:#2E5C8A; --rule:#D6DEEA; --zebra:#F4F7FB;
+  --ink:#1B1D21; --muted:#5C6470; --bg:#FFFFFF; --card:#FBFCFE;
+  --flag:#B45309; --flagbg:#FDF6EC; --flagline:#EAD9BC;
+  --ok:#1B7F4B; --okbg:#E7F5ED; --run:#1F5FA8; --runbg:#E8F0FA;
+  --stop:#B3261E; --stopbg:#FBEBEA; --wait:#8A6100; --waitbg:#FCF3E0;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --navy:#9FBBE4; --accent:#7FA3D2; --rule:#333A45; --zebra:#1B1F26;
+    --ink:#E6E8EC; --muted:#9AA3B0; --bg:#121519; --card:#1A1E24;
+    --flag:#E0A458; --flagbg:#241D12; --flagline:#4A3A20;
+    --ok:#6FD69B; --okbg:#12291D; --run:#8FB8EC; --runbg:#141F2E;
+    --stop:#F09189; --stopbg:#2B1614; --wait:#E2BE72; --waitbg:#271F0F;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:400 16.5px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  text-rendering:optimizeLegibility;
+}
+.wrap{max-width:860px; margin:0 auto; padding:22px 18px 70px}
+
+/* --- copertina --- */
+.cover{border-bottom:3px solid var(--navy); padding-bottom:26px; margin-bottom:26px}
+.cover .ente{font-size:.82rem; font-weight:700; letter-spacing:.09em; color:var(--navy); text-transform:uppercase}
+.cover .prog{font-size:.8rem; color:var(--accent); margin-top:4px; padding-bottom:14px; border-bottom:1px solid var(--rule)}
+.cover h1{font-size:clamp(1.6rem,6.2vw,2.5rem); line-height:1.15; margin:20px 0 6px; color:var(--navy); letter-spacing:-.01em}
+.cover .sub{font-size:clamp(.98rem,3.4vw,1.22rem); font-weight:600; color:var(--ink); margin:0}
+.cover .claim{margin-top:14px; font-style:italic; color:var(--accent); font-size:.95rem}
+
+/* --- frontespizio --- */
+.meta{margin:22px 0 0; border-top:1px solid var(--rule)}
+.meta div{display:flex; gap:12px; padding:8px 0; border-bottom:1px solid var(--rule); font-size:.9rem}
+.meta dt,.meta b{flex:0 0 42%; font-weight:700; color:var(--muted)}
+.meta span{flex:1}
+
+/* --- indice --- */
+.toc{margin:26px 0 8px; padding:18px 18px 14px; background:var(--zebra); border-radius:10px}
+.toc h3{margin:0 0 10px; font-size:.78rem; letter-spacing:.11em; text-transform:uppercase; color:var(--navy)}
+.toc ol{list-style:none; margin:0; padding:0}
+.toc li{margin:0}
+.toc a{display:flex; gap:10px; padding:5px 0; color:var(--ink); text-decoration:none; font-size:.92rem; border-bottom:1px solid transparent}
+.toc a:hover{color:var(--accent)}
+.toc a span{flex:0 0 2.6em; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums}
+.toc .l0>a{font-weight:600}
+.toc .l1>a{padding-left:1.6em; font-size:.87rem; color:var(--muted)}
+
+/* --- titoli --- */
+h2.s1{
+  display:flex; gap:12px; align-items:baseline;
+  font-size:clamp(1.14rem,4.4vw,1.42rem); line-height:1.25; color:var(--navy);
+  margin:44px 0 14px; padding-bottom:9px; border-bottom:2px solid var(--navy);
+  scroll-margin-top:14px;
+}
+h2.s1 .num{flex:0 0 auto; font-variant-numeric:tabular-nums; opacity:.55}
+h3.s2{font-size:clamp(1rem,3.6vw,1.13rem); color:var(--accent); margin:30px 0 10px; scroll-margin-top:14px}
+h3.s2 .num2{margin-right:8px; opacity:.6; font-variant-numeric:tabular-nums}
+h4.s3{font-size:.99rem; color:var(--ink); margin:22px 0 7px}
+
+p{margin:0 0 12px; text-align:justify; hyphens:auto}
+p.note{font-size:.85rem; color:var(--muted); font-style:italic}
+p.fix{border-left:3px solid var(--accent); padding-left:12px; background:var(--zebra); padding:9px 12px; border-radius:0 6px 6px 0; margin-bottom:18px}
+ul{margin:0 0 14px; padding-left:1.15em}
+li{margin:0 0 7px; text-align:justify}
+strong{font-weight:700}
+.flag{color:var(--flag); font-weight:700; font-style:italic}
+
+/* --- tabelle --- */
+.tw{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 0 20px; border-radius:8px}
+table.dt{width:100%; min-width:520px; border-collapse:collapse; font-size:.86rem}
+table.dt.sm{font-size:.8rem; min-width:640px}
+.landscape table.dt{min-width:940px}
+table.dt th{
+  background:var(--navy); color:#fff; text-align:left; font-weight:700;
+  padding:8px 9px; font-size:.79rem; line-height:1.3; vertical-align:middle;
+}
+table.dt td{padding:7px 9px; border:1px solid var(--rule); vertical-align:top; line-height:1.45}
+table.dt tbody tr:nth-child(even){background:var(--zebra)}
+table.dt td.center,table.dt th.center{text-align:center}
+table.dt td.right,table.dt th.right{text-align:right; font-variant-numeric:tabular-nums}
+table.dt td.lbl{font-weight:700; color:var(--muted)}
+table.dt.nohead td:first-child{background:var(--zebra)}
+
+/* --- card mobile --- */
+.cards{display:none}
+.card{background:var(--card); border:1px solid var(--rule); border-radius:11px; padding:13px 14px; margin:0 0 11px}
+.card-h{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px}
+.card h4{margin:0; font-size:.99rem; color:var(--navy); line-height:1.3}
+.card .sub{font-size:.76rem; color:var(--muted); font-variant-numeric:tabular-nums}
+.badge{flex:0 0 auto; font-size:.68rem; font-weight:700; padding:3px 8px; border-radius:20px; text-align:center; max-width:9.5em; line-height:1.3}
+.badge.ok{background:var(--okbg); color:var(--ok)}
+.badge.run{background:var(--runbg); color:var(--run)}
+.badge.stop{background:var(--stopbg); color:var(--stop)}
+.badge.wait{background:var(--waitbg); color:var(--wait)}
+.card dl{display:grid; grid-template-columns:auto 1fr; gap:5px 12px; margin:0; font-size:.85rem}
+.card dt{color:var(--muted); font-weight:600}
+.card dd{margin:0}
+
+/* --- riquadri --- */
+.box{background:var(--zebra); border:1px solid var(--rule); border-left:4px solid var(--navy);
+     border-radius:0 8px 8px 0; padding:14px 16px; margin:18px 0 22px}
+.box h4{margin:0 0 8px; font-size:.92rem; color:var(--navy)}
+.box p{margin:0 0 7px; font-size:.88rem; text-align:left}
+.box p:last-child{margin-bottom:0}
+.box.warn{background:var(--flagbg); border-color:var(--flagline); border-left-color:var(--flag)}
+.box.warn h4{color:var(--flag)}
+
+/* --- firma --- */
+.sign{display:flex; justify-content:space-between; gap:20px; margin:52px 0 30px; font-size:.9rem; flex-wrap:wrap}
+.sign>div:last-child{text-align:center}
+.sign .line{display:block; margin-top:40px; border-top:1px solid var(--ink); min-width:230px}
+
+.pagefoot{margin-top:40px; padding-top:14px; border-top:1px solid var(--rule);
+          font-size:.76rem; color:var(--muted); text-align:center}
+
+/* --- mobile (solo a schermo: in stampa la larghezza A4 ricadrebbe in questa soglia) --- */
+@media screen and (max-width:760px){
+  .wrap{padding:18px 14px 60px}
+  body{font-size:16px}
+  p,li{text-align:left}
+  .cards{display:block}
+  .cards + .tw{display:none}   /* la tabella cede il posto alle schede solo se esistono */
+  .meta div{flex-direction:column; gap:2px}
+  .meta dt,.meta b{flex:none}
+  table.dt{min-width:430px; font-size:.82rem}
+}
+
+/* --- stampa / PDF --- */
+@page{size:A4 portrait; margin:17mm 15mm 16mm}
+@page land{size:A4 landscape; margin:14mm 12mm}
+@media print{
+  :root{
+    --navy:#1F3864; --accent:#2E5C8A; --rule:#B4C3D8; --zebra:#F1F5FA;
+    --ink:#000; --muted:#4A4A4A; --bg:#fff; --card:#fff;
+    --flag:#B45309; --flagbg:#FDF6EC; --flagline:#E8D5B7;
+  }
+  body{font:400 10.2pt/1.48 "Times New Roman",Georgia,serif; color:#000; background:#fff}
+  .wrap{max-width:none; margin:0; padding:0}
+  .cover{min-height:0; page-break-after:always; border-bottom:none; text-align:center; padding-top:24mm}
+  .cover p{text-align:center}
+  .cover .prog{border-bottom:1px solid var(--rule); padding-bottom:10pt}
+  .cover .box p{text-align:justify}
+  .cover h1{font-size:30pt; margin:26pt 0 8pt}
+  .cover .sub{font-size:15pt}
+  .cover .claim{font-size:11pt; margin-top:18pt}
+  .meta{margin-top:34pt; text-align:left}
+  .meta div{font-size:9.5pt; padding:5pt 0}
+  .toc{page-break-after:always; background:none; padding:0; margin:0}
+  .toc a{font-size:10.5pt}
+  .toc a:hover{color:inherit}
+  h2.s1,h3.s2,h4.s3{page-break-after:avoid; break-after:avoid-page; font-family:Arial,Helvetica,sans-serif}
+  h2.s1{font-size:13.5pt; margin:20pt 0 9pt; page-break-before:auto}
+  h3.s2{font-size:11.5pt; margin:14pt 0 6pt}
+  h4.s3{font-size:10.5pt; margin:11pt 0 4pt}
+  p,li{orphans:3; widows:3}
+  .cards{display:none !important}
+  .tw{overflow:visible; display:block !important}
+  table.dt{min-width:0 !important; width:100%; font-size:8.4pt; page-break-inside:avoid}
+  /* le tabelle lunghe devono poter spezzarsi, altrimenti sprecano una pagina intera */
+  table.dt.lg{page-break-inside:auto; break-inside:auto}
+  table.dt.lg thead{display:table-header-group}
+  table.dt.sm{font-size:7.8pt}
+  table.dt th{font-size:8pt; font-family:Arial,Helvetica,sans-serif; padding:4pt 4pt;
+              -webkit-print-color-adjust:exact; print-color-adjust:exact}
+  table.dt td{padding:3.5pt 4pt}
+  table.dt tbody tr{page-break-inside:avoid}
+  .box,.sign{page-break-inside:avoid}
+  .box{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  table.dt tbody tr:nth-child(even){-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  .landscape{page:land; page-break-before:always; page-break-after:always}
+  .landscape table.dt{font-size:8pt}
+  .pagefoot{display:none}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+
+
+<main>
+<h2 id="sez-X" class="s1"><span class="num">X</span>Focus territoriale: Santa Elisabetta e area di riferimento</h2><aside class="box warn">
+    <h4>Nota per l’inserimento</h4>
+    <p>Il presente testo è una <strong>bozza destinata al capitolo «Focus territoriale»</strong> della Mappatura SAI Agrigento. La numerazione dei paragrafi (X.1, X.2 …) va sostituita con quella del documento di destinazione.</p><p>Le aziende elencate al § X.3 sono le <strong>sole</strong> di cui si dispone di riscontro documentale diretto, in quanto hanno ospitato un beneficiario del progetto. Non costituiscono un censimento del tessuto imprenditoriale locale: i §§ X.1 e X.2 ne descrivono la struttura su base statistica, senza nominare imprese non verificate.</p><p>I dati sul numero di imprese registrate provengono da fonte secondaria e vanno <strong>verificati presso la Camera di Commercio</strong> prima della trasmissione formale del documento.</p>
+  </aside><h3 id="sez-X-1" class="s2"><span class="num2">X.1</span>Il contesto demografico e territoriale</h3><p><strong>Santa Elisabetta</strong> è un comune di <strong>2.208 abitanti</strong> su una superficie di <strong>16,17 km²</strong>, con una densità di 137 abitanti per km² e un’altitudine di 421 metri sul livello del mare. È il <strong>comune più piccolo per superficie territoriale</strong> del libero consorzio comunale di Agrigento. Il centro sorge a breve distanza da Raffadali, dal quale storicamente dipende: fu fondato nel 1620 per iniziativa del signore di Raffadali e popolato in larga parte da famiglie provenienti da quel comune.</p><p>La dimensione demografica è l’elemento che condiziona in misura maggiore l’attività del servizio di orientamento al lavoro. Un bacino di poco più di duemila residenti non è in grado di esprimere una domanda di lavoro capace di assorbire il numero di beneficiari in accoglienza: <strong>l’area di riferimento operativa del servizio non coincide con il territorio comunale</strong> e si estende necessariamente ai centri limitrofi e ai due poli maggiori dell’area, il capoluogo e Canicattì.</p><div class="tw"><table class="dt"><colgroup><col style="width:28.00%"><col style="width:16.00%"><col style="width:16.00%"><col style="width:40.00%"></colgroup><thead><tr><th class="">Comune</th><th class="center">Abitanti</th><th class="center">Superficie</th><th class="">Rilievo per il servizio</th></tr></thead><tbody><tr><td class=""><strong>Santa Elisabetta</strong></td><td class="center">2.208</td><td class="center">16,17 km²</td><td class="">Sede del progetto; bacino di prossimità</td></tr><tr><td class="">Raffadali</td><td class="center">11.769</td><td class="center">22,30 km²</td><td class="">Primo bacino di riferimento — circa 4 km</td></tr><tr><td class="">Agrigento</td><td class="center">55.118</td><td class="center">243,57 km²</td><td class="">Capoluogo; servizi per il lavoro e CPI</td></tr><tr><td class="">Canicattì</td><td class="center">34.249</td><td class="center">91,86 km²</td><td class="">Secondo polo economico dell’area</td></tr><tr><td class="">Aragona</td><td class="center">8.669</td><td class="center">74,77 km²</td><td class="">Bacino intermedio verso il capoluogo</td></tr><tr><td class="">Sant’Angelo Muxaro</td><td class="center">1.119</td><td class="center">64,52 km²</td><td class="">Comune confinante — circa 5 km</td></tr><tr><td class="">Joppolo Giancaxio</td><td class="center">1.064</td><td class="center">19,14 km²</td><td class="">Comune confinante — circa 5 km</td></tr></tbody></table></div><p class="note">Popolazione e superficie: stime ISTAT al 1° gennaio 2026. Le distanze sono espresse in linea d’aria e vanno intese come indicative: la percorrenza stradale effettiva è superiore.</p><p>La gerarchia dei bacini è netta. <strong>Raffadali</strong>, a pochi chilometri e con una popolazione cinque volte superiore, costituisce il primo mercato accessibile e di fatto l’estensione naturale del territorio comunale. <strong>Agrigento</strong> e <strong>Canicattì</strong>, con una popolazione rispettivamente venticinque e quindici volte quella di Santa Elisabetta, rappresentano i poli in grado di offrire varietà di mansioni e presenza di imprese strutturate, al prezzo di un onere di mobilità significativamente maggiore. I comuni confinanti minori — Sant’Angelo Muxaro e Joppolo Giancaxio, entrambi sotto i 1.200 abitanti — non aggiungono capacità di assorbimento apprezzabile.</p><h3 id="sez-X-2" class="s2"><span class="num2">X.2</span>Il tessuto imprenditoriale</h3><p>Il numero di imprese registrate restituisce con chiarezza lo squilibrio fra il comune sede del progetto e il primo bacino limitrofo: <strong>163 imprese a Santa Elisabetta a fronte di 842 a Raffadali</strong>, oltre cinque volte tanto. Rapportato alla popolazione, il dato indica una densità imprenditoriale sostanzialmente allineata fra i due comuni; in valore assoluto, tuttavia, è la sola scala di Raffadali a rendere praticabile una attività di scouting continuativa.</p><p>Sul piano della composizione settoriale, l’<strong>agricoltura</strong> costituisce l’attività prevalente dell’economia agrigentina, assorbendo circa il <strong>28% delle attività produttive</strong> provinciali. A Santa Elisabetta le produzioni caratteristiche sono <strong>pistacchi, mandorle e cereali</strong>. Il settore primario, e con esso l’indotto della trasformazione e della commercializzazione dei prodotti agricoli, rappresenta pertanto il comparto a più elevato potenziale di assorbimento dell’area, ad oggi non presidiato dalla rete del progetto.</p><p>Il tessuto è composto in prevalenza da <strong>imprese di piccolissima dimensione</strong>, spesso a conduzione familiare e prive di una funzione strutturata di gestione del personale. Questa caratteristica ha due conseguenze dirette sull’attività di orientamento. La prima è che l’attivazione di una borsa lavoro o di un tirocinio dipende dal rapporto fiduciario costruito con il titolare, e non da una procedura di selezione: <strong>il lavoro di rete è quindi relazionale e non replicabile per via amministrativa</strong>. La seconda è che ogni singola impresa può ospitare, di norma, un solo beneficiario per volta, il che rende il numero di soggetti ospitanti in rete — e non la dotazione finanziaria disponibile — il vero fattore limitante degli inserimenti.</p><p class="note">I dati sul numero di imprese registrate e sulla composizione settoriale provinciale provengono da fonti secondarie e vanno verificati presso la Camera di Commercio competente prima della trasmissione formale del documento.</p><h3 id="sez-X-3" class="s2"><span class="num2">X.3</span>Le aziende della rete attivata</h3><p>Il progetto ha attivato nell’annualità 2026 <strong>nove soggetti ospitanti</strong>, distribuiti su tre comuni e sei settori economici. Si tratta delle imprese e degli enti che hanno effettivamente accolto un beneficiario nell’ambito di un percorso di borsa lavoro o di tirocinio, e che costituiscono pertanto la rete territoriale operativa del servizio.</p><div class="tw"><table class="dt sm"><colgroup><col style="width:24.00%"><col style="width:16.00%"><col style="width:16.00%"><col style="width:9.00%"><col style="width:35.00%"></colgroup><thead><tr><th class="">Soggetto ospitante</th><th class="">Settore</th><th class="">Sede</th><th class="center">Ben.</th><th class="">Stato della collaborazione</th></tr></thead><tbody><tr><td class=""><strong>Butera Alfonso</strong></td><td class="">Artigianato</td><td class="">S. Elisabetta</td><td class="center">1</td><td class="">Percorso concluso</td></tr><tr><td class=""><strong>Ditta Galvano</strong></td><td class="">Artigianato</td><td class="">S. Elisabetta</td><td class="center">1</td><td class="">Percorso in corso</td></tr><tr><td class=""><strong>Bar Ibis</strong></td><td class="">Commercio</td><td class="">S. Elisabetta</td><td class="center">1</td><td class="">Percorso in corso</td></tr><tr><td class=""><strong>Fragapane Bibite</strong></td><td class="">Commercio</td><td class="">S. Elisabetta</td><td class="center">1</td><td class="">Percorso interrotto</td></tr><tr><td class=""><strong>Comune di S. Elisabetta</strong></td><td class="">Ente pubblico</td><td class="">S. Elisabetta</td><td class="center">2</td><td class="">Convenzione da perfezionare — nessun avvio</td></tr><tr><td class=""><strong>Ditta MARLOT</strong></td><td class="">Ristorazione</td><td class="">Raffadali</td><td class="center">1</td><td class="">Borsa conclusa + tirocinio extracurriculare in corso</td></tr><tr><td class=""><strong>Fragapane</strong></td><td class="">Edilizia</td><td class="">Raffadali</td><td class="center">1</td><td class="">Percorso concluso</td></tr><tr><td class=""><strong>Fragapane Trasporti</strong></td><td class="">Trasporti</td><td class="">Raffadali</td><td class="center">1</td><td class="">Percorso in corso</td></tr><tr><td class=""><strong>Ditta Costa’s</strong></td><td class="">Ristorazione</td><td class="">Canicattì</td><td class="center">1</td><td class="">Nuovo inserimento — apertura su nuovo bacino</td></tr></tbody></table></div><p class="note">Fonte: Prospetto Borse Lavoro del progetto SAI PROG-684-PR, dati al 4 agosto 2026. La colonna «Ben.» indica il numero di beneficiari ospitati nell’annualità.</p><p>La distribuzione territoriale della rete riflette la gerarchia dei bacini descritta al § X.1: <strong>cinque soggetti a Santa Elisabetta</strong>, <strong>tre a Raffadali</strong> e <strong>uno a Canicattì</strong>. Quest’ultimo, attivato nell’agosto 2026, rappresenta la prima apertura del progetto sul secondo polo economico dell’area e costituisce un precedente operativo di rilievo per l’ampliamento della rete.</p><p>Sul piano settoriale i nove soggetti coprono <strong>artigianato</strong> e <strong>commercio</strong> con due posizioni ciascuno, <strong>ristorazione</strong> con due, <strong>ente pubblico</strong> con due, <strong>edilizia</strong> e <strong>trasporti</strong> con una. Va segnalato che tre delle posizioni fanno capo a realtà riconducibili alla <strong>medesima denominazione imprenditoriale</strong>, operanti peraltro in settori distinti: il dato testimonia la solidità del rapporto costruito con un interlocutore disponibile, ma espone il progetto a una dipendenza da un numero ristretto di soggetti.</p><p>Il <strong>Comune di Santa Elisabetta</strong> merita una considerazione specifica, in quanto unico soggetto pubblico della rete e al tempo stesso Ente titolare del progetto. Entrambe le posizioni programmate presso di esso non sono state avviate, mentre tutte le posizioni presso soggetti privati lo sono state regolarmente: la criticità è concentrata sul versante della collaborazione istituzionale e richiede un intervento mirato.</p><h3 id="sez-X-4" class="s2"><span class="num2">X.4</span>Lettura per il servizio di orientamento al lavoro</h3><p>Il confronto fra la dimensione dell’utenza e la dimensione della rete restituisce il vincolo strutturale dell’intervento: <strong>cinquanta beneficiari in carico a fronte di nove soggetti ospitanti attivati</strong>. Poiché le imprese dell’area, per dimensione media, possono ospitare di norma un solo beneficiario per volta, la capacità di assorbimento della rete risulta largamente inferiore alla domanda potenziale.</p><p>Ne discende che <strong>l’ampliamento della base di imprese ospitanti costituisce la leva a più elevato impatto sul tasso di inserimento</strong>, più ancora dell’incremento delle risorse finanziarie disponibili. Le tre direttrici di sviluppo che il quadro territoriale suggerisce sono le seguenti.</p><div class="tw"><table class="dt sm"><colgroup><col style="width:26.00%"><col style="width:42.00%"><col style="width:32.00%"></colgroup><thead><tr><th class="">Direttrice</th><th class="">Motivazione</th><th class="">Azione proposta</th></tr></thead><tbody><tr><td class="">Consolidamento su Raffadali</td><td class="">Primo bacino accessibile, con oltre cinquecento imprese in più rispetto al comune sede e onere di mobilità contenuto</td><td class="">Scouting sistematico; obiettivo di tre nuovi soggetti ospitanti</td></tr><tr><td class="">Apertura al settore agricolo e all’indotto</td><td class="">Comparto prevalente dell’economia provinciale, oggi del tutto assente dalla rete; produzioni locali di pistacchi, mandorle e cereali</td><td class="">Contatto con aziende agricole e cooperative di trasformazione; verifica della stagionalità</td></tr><tr><td class="">Presidio del polo di Canicattì</td><td class="">Secondo polo economico dell’area, con presenza di imprese strutturate; già aperto con un primo inserimento</td><td class="">Consolidamento del rapporto avviato; verifica preventiva della sostenibilità degli spostamenti</td></tr></tbody></table></div><p>Il tema della <strong>mobilità</strong> attraversa tutte e tre le direttrici e va affrontato in via preliminare. Quattro dei dieci percorsi attivati nell’annualità hanno sede fuori dal comune di residenza del beneficiario. Su un’indennità mensile di € 500,00, il costo e i tempi del trasporto pubblico extraurbano incidono in misura non trascurabile e costituiscono, al tempo stesso, un fattore di rischio per la tenuta dei percorsi più distanti e un limite oggettivo al bacino di imprese effettivamente proponibili. La verifica della disponibilità di abbonamenti agevolati e la valutazione di una voce di rimborso spese di trasporto nella riprogrammazione del piano finanziario sono pertanto condizioni abilitanti dell’ampliamento della rete, e non misure accessorie.</p>
+</main>
+
+<div class="pagefoot">Bozza per inserimento — Focus territoriale Santa Elisabetta</div>
+</div>
+</body>
+</html>
