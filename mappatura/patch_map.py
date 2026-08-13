@@ -1,8 +1,13 @@
 """Inserisce nel cap. 7 della Mappatura SAI Agrigento il focus sul territorio di
-Santa Elisabetta e comuni contermini, con l'elenco delle imprese.
-Riproduce esattamente i pattern di paragrafo già presenti nel documento."""
+Santa Elisabetta e comuni contermini, con il censimento delle imprese.
+Riproduce esattamente i pattern di paragrafo già presenti nel documento.
+Va eseguito sulla copia scompattata del documento ORIGINALE."""
 
+import sys
 from xml.sax.saxutils import escape
+
+sys.path.insert(0, '..')
+from imprese import COMUNI, RETE
 
 DOC = 'word/document.xml'
 
@@ -12,6 +17,9 @@ RPR_BODY = ('<w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:h
 RPR_BODY_B = ('<w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>'
               '<w:b/><w:bCs/><w:i w:val="false"/><w:iCs w:val="false"/>'
               '<w:sz w:val="22"/><w:szCs w:val="22"/>')
+RPR_BODY_I = ('<w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>'
+              '<w:b w:val="false"/><w:bCs w:val="false"/><w:i/><w:iCs/>'
+              '<w:sz w:val="20"/><w:szCs w:val="20"/>')
 RPR_LIST = ('<w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>'
             '<w:sz w:val="22"/><w:szCs w:val="22"/>')
 RPR_LIST_B = ('<w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>'
@@ -26,8 +34,7 @@ def run(text, rpr):
 
 def rich(text, rpr_plain, rpr_bold):
     """Interpreta **grassetto** producendo run distinti."""
-    out, buf, bold = [], '', False
-    i = 0
+    out, buf, bold, i = [], '', False, 0
     while i < len(text):
         if text[i:i + 2] == '**':
             if buf:
@@ -48,11 +55,6 @@ def body(text):
             + rich(text, RPR_BODY, RPR_BODY_B) + '</w:p>')
 
 
-RPR_BODY_I = ('<w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/>'
-              '<w:b w:val="false"/><w:bCs w:val="false"/><w:i/><w:iCs/>'
-              '<w:sz w:val="20"/><w:szCs w:val="20"/>')
-
-
 def body_italic(text):
     return ('<w:p><w:pPr><w:spacing w:after="160" w:line="276"/><w:jc w:val="both"/></w:pPr>'
             + run(text, RPR_BODY_I) + '</w:p>')
@@ -69,67 +71,7 @@ def h2(text):
             + run(text, RPR_H2) + '</w:p>')
 
 
-# ---------------------------------------------------------------- imprese
-IMPRESE = [
-    ('Agricoltura e agroalimentare', [
-        '**SICILY FOOD S.r.l.** (Aragona) – lavorazione e conservazione di prodotti ittici (ATECO 10.20.00); classe di fatturato 25-50 milioni di euro, la maggiore impresa manifatturiera dell’area;',
-        '**MANCUSO VINCENZO & C. S.r.l.** (Aragona) – produzione di gelati (ATECO 10.52.00); 10-25 milioni;',
-        '**MANGIMIFICIO S. ANTONIO S.r.l.** (Aragona) – produzione di prodotti per l’alimentazione degli animali (ATECO 10.90.00); 5-10 milioni;',
-        '**DI STEFANO DOLCIARIA S.r.l.** (Raffadali) – industria dolciaria (ATECO 10.72.00); 2-5 milioni;',
-        '**L’ANTICO FORNO S.a.s.** (Raffadali) – produzione di prodotti di panetteria freschi (ATECO 10.71.10);',
-        '**LA MANDORLA di Curaba & Gentile S.r.l.** (Raffadali) – commercio all’ingrosso di frutta e ortaggi (ATECO 46.31.00);',
-        '**Azienda agricola Terrazzino** (Raffadali) – mandorle, olive, olio, uva da vino;',
-        '**A.C.I.M. S.r.l. Società Agricola** (Sant’Angelo Muxaro) – attività agricola (ATECO 01.48.10).',
-    ]),
-    ('Ristorazione, ricettività e turismo rurale', [
-        '**LE CUSPIDI S.r.l.** (Raffadali) – ristorazione (ATECO 56.10.30); 5-10 milioni;',
-        '**S.I.S. Società Italiana Servizi S.r.l.** (Joppolo Giancaxio) – ristorazione con somministrazione (ATECO 56.11.11); 1-2 milioni;',
-        '**RIZZO GAETANO** (Santa Elisabetta) – bar ed esercizi simili (ATECO 56.30.00);',
-        '**VAL DI KAM S.r.l.s.** (Sant’Angelo Muxaro) – servizi turistici e di prenotazione (ATECO 79.90.04), operatore di riferimento per il turismo rurale dell’area dei Sicani.',
-    ]),
-    ('Edilizia, impiantistica e carpenteria metallica', [
-        '**LA PORTA INDUSTRIES S.r.l.** (Aragona) – fabbricazione di strutture metalliche (ATECO 25.11.00); 5-10 milioni;',
-        '**ITALSERRAMENTI S.r.l.** (Aragona) – fabbricazione di serramenti metallici (ATECO 25.12.10);',
-        '**MILITELLO COSTRUZIONI S.r.l.** (Santa Elisabetta) – installazione di impianti elettrici (ATECO 43.21.01); 2-5 milioni;',
-        '**EDIL F.G.M. S.r.l.** (Raffadali) – commercio di materiali da costruzione; 2-5 milioni;',
-        '**CATUARA DAMIANO SALVATORE** (Santa Elisabetta) – costruzione di edifici (ATECO 41.20.00);',
-        '**T.I.M.E.T.I.C. S.r.l.** (Joppolo Giancaxio) – costruzione di edifici (ATECO 41.00.00).',
-    ]),
-    ('Commercio, distribuzione e logistica', [
-        '**MATTANA S.r.l.** (Raffadali) – commercio all’ingrosso (ATECO 46.30.00); 10-25 milioni;',
-        '**ERANA AUT.CARB. S.r.l.** (Raffadali) – trasporto di merci su strada (ATECO 49.41.00); 10-25 milioni;',
-        '**F.LLI FRAGAPANE S.r.l.** (Santa Elisabetta) – commercio all’ingrosso di bevande (ATECO 46.34.10); 2-5 milioni;',
-        '**TABONE TRASPORTI S.r.l.** (Santa Elisabetta) – trasporto di merci su strada (ATECO 49.41.00); 1-2 milioni;',
-        '**FP MARKET S.r.l.** (Santa Elisabetta) – commercio al dettaglio alimentare (ATECO 47.11.40);',
-        '**AUTOSERVIZI di Fragapane Pietro & C. S.n.c.** (Santa Elisabetta) – trasporto terrestre di passeggeri (ATECO 49.39.09);',
-        '**F.LLI CAMILLERI & ARGENTO S.r.l.** (Raffadali) – trasporto di passeggeri (ATECO 49.31.00).',
-    ]),
-    ('Servizi ambientali e igiene urbana', [
-        '**ISEDA S.r.l.** (Aragona) – raccolta di rifiuti non pericolosi (ATECO 38.11.00); 10-25 milioni;',
-        '**S.E.A.P. – Società Europea Appalti Pubblici S.r.l.** (Aragona) – raccolta di rifiuti non pericolosi (ATECO 38.11.00); 10-25 milioni;',
-        '**GIGLIONE SERVIZI ECOLOGICI S.r.l.** (Joppolo Giancaxio) – attività di risanamento e servizi ecologici (ATECO 38.30.00); 2-5 milioni.',
-    ]),
-    ('Servizi alla persona e comparto socio-sanitario', [
-        '**SANITARIA DELFINO Società Cooperativa Sociale** (Raffadali) – assistenza sociale non residenziale (ATECO 88.10.00); 5-10 milioni;',
-        '**Società Cooperativa Sociale IL SORRISO** (Raffadali) – servizi di supporto alle attività amministrative (ATECO 82.10.00).',
-    ]),
-    ('Artigianato e manifattura', [
-        '**CARROZZERIA F.LLI LOMBARDO S.n.c.** (Santa Elisabetta) – riparazione di carrozzerie di autoveicoli (ATECO 45.20.20);',
-        '**MED CART GALVANO S.r.l.** (Raffadali) – fabbricazione di carta e di imballaggi (ATECO 17.21.00); 2-5 milioni.',
-    ]),
-]
-
-RETE = [
-    '**Ditta MARLOT** (Raffadali) – ristorazione: borsa lavoro conclusa e successivo tirocinio extracurriculare, promosso da Agenzia per il Lavoro accreditata;',
-    '**Butera Alfonso** (Santa Elisabetta) – artigianato: percorso concluso;',
-    '**Ditta Galvano** (Santa Elisabetta) – artigianato: percorso in corso;',
-    '**Bar Ibis** (Santa Elisabetta) – commercio: percorso in corso;',
-    '**Fragapane Bibite** (Santa Elisabetta) – commercio all’ingrosso di bevande: percorso interrotto;',
-    '**Fragapane** (Raffadali) – edilizia: percorso concluso;',
-    '**Fragapane Trasporti** (Raffadali) – trasporti: percorso in corso;',
-    '**Ditta Costa’s** (Canicattì) – ristorazione: percorso avviato nell’agosto 2026, prima apertura del progetto sul polo canicattinese;',
-    '**Comune di Santa Elisabetta** – ente pubblico: due posizioni programmate, convenzione da perfezionare.',
-]
+TOT = sum(len(v) for _, _, v in COMUNI)
 
 # ---------------------------------------------------------------- costruzione
 xml = []
@@ -156,33 +98,46 @@ xml.append(body(
     'un tirocinio dipende dal rapporto fiduciario costruito con il titolare e non da una procedura di selezione, e che '
     'ciascuna impresa può ospitare di norma un solo beneficiario per volta.'))
 xml.append(body(
-    'Si riporta di seguito una ricognizione delle imprese del perimetro di prossimità, ordinate secondo i comparti '
-    'individuati al capitolo 4 e selezionate in ragione della loro rilevanza ai fini dell’inserimento lavorativo dei '
-    'beneficiari. L’elenco non ha carattere esaustivo e costituisce una **base di scouting**, da aggiornare e verificare '
-    'presso la Camera di Commercio prima di ogni contatto operativo.'))
+    'Si avverte che il numero di **imprese registrate** indicato per ciascun comune è tratto dalla banca dati camerale e '
+    'comprende in prevalenza società di capitali e di persone, mentre il numero di **attività censite** nel presente '
+    'paragrafo include anche esercizi commerciali e di ristorazione rilevati da altri repertori: per i comuni di minore '
+    'dimensione il secondo valore può pertanto risultare superiore al primo.'))
+xml.append(body(
+    f'Si riporta di seguito la ricognizione di **{TOT} imprese e attività** del perimetro di prossimità, ordinate per '
+    'comune e, all’interno di ciascun comune, per comparto di appartenenza. La selezione privilegia i settori a maggiore '
+    'potenziale di inserimento per i beneficiari — agroalimentare, ristorazione e panificazione, agricoltura, edilizia e '
+    'impiantistica, commercio e logistica, servizi ambientali e alla persona. L’elenco non ha carattere esaustivo e '
+    'costituisce una **base di scouting** da verificare presso la Camera di Commercio prima di ogni contatto operativo.'))
 
-for titolo, voci in IMPRESE:
-    xml.append(body(f'**{titolo}:**'))
+for nome, sub, voci in COMUNI:
+    xml.append(body(f'**{nome}** ({sub}) — {len(voci)} attività censite:'))
     for v in voci:
         xml.append(bullet(v))
 
 xml.append(body(
-    'Complessivamente la ricognizione censisce **trentadue imprese** distribuite su cinque comuni e sette comparti. Sul '
-    'piano delle opportunità di inserimento, tre elementi meritano attenzione. Il primo è la presenza, nel comparto '
-    'agroalimentare di Aragona, di **imprese di dimensione industriale** — con classi di fatturato fino a 25-50 milioni '
-    'di euro — che dispongono di una struttura organizzativa in grado di gestire tirocini in modo continuativo, '
-    'diversamente dalla microimpresa prevalente. Il secondo è il peso del comparto dei **servizi ambientali e dell’igiene '
-    'urbana**, presidiato da tre imprese di dimensione medio-grande: si tratta di un settore a bassa barriera di ingresso '
-    'sul piano delle competenze formali, storicamente accessibile ai beneficiari dei progetti di accoglienza. Il terzo è '
-    'la presenza di **due cooperative sociali** a Raffadali, interlocutori naturali di un progetto SAI sia come soggetti '
-    'ospitanti sia come partner di rete.'))
+    f'La ricognizione censisce complessivamente **{TOT} attività** distribuite su cinque comuni. Sul piano delle '
+    'opportunità di inserimento, quattro elementi meritano attenzione. Il primo è la consistenza del comparto '
+    '**agroalimentare e della panificazione**: fra industria dolciaria, panifici, pasticcerie e lavorazione dei prodotti '
+    'ittici il perimetro esprime una filiera completa, che comprende imprese di dimensione industriale — con classi di '
+    'fatturato fino a 25-50 milioni di euro — dotate di una struttura organizzativa in grado di gestire tirocini in modo '
+    'continuativo, diversamente dalla microimpresa prevalente.'))
 xml.append(body(
-    'Va per contro segnalata l’**assenza pressoché totale di imprese agricole strutturate** nel perimetro di prossimità, '
-    'a fronte di un comparto che rappresenta l’attività prevalente dell’economia provinciale. Le produzioni caratteristiche '
-    'dell’area — mandorle, pistacchi, olive e cereali — sono in larga parte gestite da conduttori diretti non organizzati '
-    'in forma d’impresa, e come tali difficilmente attivabili quali soggetti ospitanti. L’accesso al comparto agricolo '
-    'richiede pertanto di rivolgersi alle realtà strutturate del polo di Canicattì, dove la filiera dell’uva da tavola e '
-    'dell’ortofrutta esprime una domanda di manodopera stagionale documentata.'))
+    'Il secondo è la **densità della ristorazione a Raffadali**, che con oltre dieci fra ristoranti, pizzerie, bar e '
+    'birrifici costituisce il comparto più accessibile in termini di competenze formali richieste e il più prossimo alla '
+    'sede del progetto. Il terzo è il peso del comparto dei **servizi ambientali e dell’igiene urbana**, presidiato ad '
+    'Aragona e a Joppolo Giancaxio da quattro imprese di dimensione medio-grande: settore a bassa barriera di ingresso e '
+    'storicamente accessibile ai beneficiari dei progetti di accoglienza. Il quarto è la presenza di **due cooperative '
+    'sociali** a Raffadali, interlocutori naturali di un progetto SAI sia come soggetti ospitanti sia come partner di rete.'))
+xml.append(body(
+    'Merita infine segnalazione il **pistacchio di Raffadali**, produzione tipica la cui area di coltivazione comprende '
+    'le contrade di Santa Elisabetta, Joppolo Giancaxio e Sant’Angelo Muxaro oltre a quelle del comune capofila. La '
+    'filiera — che va dalla coltivazione alla trasformazione dolciaria, presidiata da imprese storiche del territorio — '
+    'rappresenta l’asse produttivo identitario dell’area e un ambito privilegiato per la costruzione di percorsi di '
+    'inserimento stagionali e di qualificazione professionale. Va per contro rilevato che le produzioni agricole locali '
+    'sono in larga parte gestite da conduttori diretti non organizzati in forma d’impresa e come tali difficilmente '
+    'attivabili quali soggetti ospitanti: l’accesso strutturato al comparto agricolo richiede di rivolgersi anche alle '
+    'realtà del polo di Canicattì, dove la filiera dell’uva da tavola e dell’ortofrutta esprime una domanda di manodopera '
+    'stagionale documentata.'))
 
 xml.append(h2('7.6 La rete di imprese già attivata dal progetto'))
 xml.append(body(
@@ -196,7 +151,8 @@ xml.append(body(
     'Raffadali e uno a Canicattì. Il rapporto fra la dimensione dell’utenza in carico e la dimensione della rete '
     'costituisce il vincolo strutturale dell’intervento: poiché le imprese dell’area possono ospitare di norma un solo '
     'beneficiario per volta, **l’ampliamento della base di imprese ospitanti costituisce la leva a più elevato impatto '
-    'sul tasso di inserimento**, più ancora dell’incremento delle risorse finanziarie disponibili.'))
+    f'sul tasso di inserimento**, più ancora dell’incremento delle risorse finanziarie disponibili. Il censimento di {TOT} '
+    'attività riportato al paragrafo precedente costituisce la base operativa di tale ampliamento.'))
 xml.append(body(
     'Si segnala infine che due dei soggetti ospitanti già in rete risultano verosimilmente riconducibili a imprese censite '
     'al § 7.5 — **F.LLI FRAGAPANE S.r.l.** per il commercio all’ingrosso di bevande e **AUTOSERVIZI di Fragapane Pietro & '
@@ -204,17 +160,17 @@ xml.append(body(
     'della denominazione nei registri di progetto, oggi compilati con denominazioni di uso corrente anziché con la '
     'ragione sociale.'))
 xml.append(body_italic(
-    'Fonte dei dati d’impresa: banca dati Aziende.it su base Registro Imprese, consultata nell’agosto 2026; dati '
-    'demografici ISTAT al 1° gennaio 2026. Le informazioni su ragione sociale, codice ATECO e classe di fatturato vanno '
-    'verificate presso la Camera di Commercio di Agrigento prima di ogni utilizzo in sede di rendicontazione o di contatto '
-    'formale con le imprese.'))
+    'Fonti dei dati d’impresa: banca dati Aziende.it su base Registro Imprese; Virgilio Aziende e PagineGialle per gli '
+    'esercizi di ristorazione, panificazione e pasticceria; ricognizione web condotta nell’agosto 2026. Dati demografici '
+    'ISTAT al 1° gennaio 2026. Ragioni sociali, codici ATECO, classi di fatturato e recapiti vanno verificati presso la '
+    'Camera di Commercio di Agrigento prima di ogni utilizzo in sede di rendicontazione o di contatto formale con le '
+    'imprese; l’elenco può contenere posizioni cessate o variate.'))
 
 NEW = ''.join(xml)
 
 # ---------------------------------------------------------------- inserimento
 s = open(DOC, encoding='utf-8').read()
 
-# 1) integra il testo del § 7.4 citando Raffadali e i comuni contermini
 OLD74 = ('Le esperienze di rivitalizzazione dei borghi e il fabbisogno di manodopera agricola e di servizi alla persona '
          'rappresentano, per i progetti di accoglienza, un ambito di sperimentazione di percorsi abitativi e lavorativi integrati.')
 NEW74 = (OLD74 + ' All’area va ricondotto anche il sistema di prossimità che gravita su Santa Elisabetta, comprendente '
@@ -224,13 +180,14 @@ assert s.count(OLD74) == 1, f'ancora § 7.4 non univoca: {s.count(OLD74)}'
 assert '&' not in NEW74 and '<' not in NEW74, 'NEW74 richiede escaping XML'
 s = s.replace(OLD74, NEW74)
 
-# 2) inserisce i nuovi paragrafi prima del capitolo 8
-ANCHOR = '<w:p><w:pPr><w:pStyle w:val="Heading1"/><w:spacing w:after="200" w:before="320"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/><w:b/><w:bCs/><w:color w:val="1F3864"/><w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr><w:t xml:space="preserve">8. Analisi SWOT in chiave di inserimento socio-lavorativo</w:t></w:r></w:p>'
+ANCHOR = ('<w:p><w:pPr><w:pStyle w:val="Heading1"/><w:spacing w:after="200" w:before="320"/></w:pPr><w:r><w:rPr>'
+          '<w:rFonts w:ascii="Calibri" w:cs="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri"/><w:b/><w:bCs/>'
+          '<w:color w:val="1F3864"/><w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr>'
+          '<w:t xml:space="preserve">8. Analisi SWOT in chiave di inserimento socio-lavorativo</w:t></w:r></w:p>')
 assert s.count(ANCHOR) == 1, f'ancora cap. 8 non univoca: {s.count(ANCHOR)}'
 s = s.replace(ANCHOR, NEW + ANCHOR)
 
 open(DOC, 'w', encoding='utf-8').write(s)
 
-n_imprese = sum(len(v) for _, v in IMPRESE)
-print(f'inserite {n_imprese} imprese in {len(IMPRESE)} comparti + {len(RETE)} soggetti già in rete')
+print(f'inserite {TOT} attività su {len(COMUNI)} comuni + {len(RETE)} soggetti già in rete')
 print('nuovi paragrafi:', len(xml))
