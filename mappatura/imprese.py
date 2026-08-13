@@ -1,117 +1,147 @@
 # -*- coding: utf-8 -*-
-"""Censimento imprese del perimetro di prossimità di Santa Elisabetta.
-Fonti: Aziende.it (base Registro Imprese), Virgilio Aziende, PagineGialle/PagineBianche,
-ricognizione web agosto 2026. Nessuna voce inventata."""
+"""Censimento imprese del perimetro di prossimità di Santa Elisabetta,
+ordinato per comparto economico secondo la tassonomia del cap. 4 del documento.
+Fonti: Aziende.it (base Registro Imprese) per ragione sociale, ATECO e classe di
+fatturato; Virgilio Aziende e PagineGialle per gli esercizi di ristorazione,
+panificazione e pasticceria; ricognizione web agosto 2026.
+Nessuna voce inventata: dove il codice ATECO non è disponibile alla fonte non è
+stato attribuito."""
 
-COMUNI = [
-    ('Santa Elisabetta', '2.208 abitanti · 13 imprese registrate', [
-        '**F.LLI FRAGAPANE S.r.l.** – commercio all’ingrosso di bevande (ATECO 46.34.10); 2-5 milioni;',
-        '**F.LLI FRAGAPANE di Fragapane Francesco e C. S.n.c.** – commercio all’ingrosso di prodotti alimentari (ATECO 46.39.00);',
-        '**FP MARKET S.r.l.** – commercio al dettaglio alimentare, supermercato (ATECO 47.11.40);',
-        '**TANOGEL di Gaetano Mario Di Vincenzo** – commercio all’ingrosso di prodotti surgelati (ATECO 46.39.10);',
-        '**AUTOSERVIZI di Fragapane Pietro & C. S.n.c.** – trasporto terrestre di passeggeri (ATECO 49.39.09);',
-        '**TABONE TRASPORTI S.r.l.** – trasporto di merci su strada (ATECO 49.41.00); 1-2 milioni;',
-        '**MILITELLO COSTRUZIONI S.r.l.** – installazione di impianti elettrici (ATECO 43.21.01); 2-5 milioni;',
-        '**CATUARA DAMIANO SALVATORE** – costruzione di edifici (ATECO 41.20.00);',
-        '**CARROZZERIA F.LLI LOMBARDO S.n.c.** – riparazione di carrozzerie di autoveicoli (ATECO 45.20.20);',
-        '**RIZZO GAETANO** – bar ed esercizi simili (ATECO 56.30.00);',
-        '**Ristorante Pizzeria Kometa** – ristorazione, contrada Merceri;',
-        '**The Arabian Horse Ranch** – ristorazione e turismo equestre, contrada Carbonio 6;',
-        '**LA ROSA L’ARTE DELLA CERA S.r.l.s.** – produzione e commercio di articoli in cera (ATECO 46.49.90);',
-        '**FARMACIA FRAGAPANE MIRELLA** – farmacia (ATECO 47.73.00);',
-        '**CENTRO DENTALE TABUSO S.r.l.** – studio odontoiatrico (ATECO 86.23.00);',
-        '**MILITELLO GIUSEPPE** – elaborazione elettronica dei dati (ATECO 63.11.10).',
+SETTORI = [
+
+    ('Agricoltura, agroalimentare e indotto', [
+        '**SICILY FOOD S.r.l.** (Aragona) – lavorazione e conservazione di prodotti ittici (ATECO 10.20.00); 25-50 milioni, la maggiore impresa manifatturiera del perimetro;',
+        '**MANCUSO VINCENZO & C. S.r.l.** (Aragona) – produzione di gelati (ATECO 10.52.00); 10-25 milioni;',
+        '**MANGIMIFICIO S. ANTONIO S.r.l.** (Aragona) – produzione di prodotti per l’alimentazione degli animali (ATECO 10.90.00); 5-10 milioni;',
+        '**DI STEFANO DOLCIARIA S.r.l.** (Raffadali) – industria dolciaria (ATECO 10.72.00); 2-5 milioni;',
+        '**F.LLI CUFFARO S.r.l.** (Raffadali) – commercio all’ingrosso di frutta e ortaggi (ATECO 46.31.10); 2-5 milioni;',
+        '**LA MANDORLA di Curaba & Gentile S.r.l.** (Raffadali) – commercio all’ingrosso di frutta e ortaggi (ATECO 46.31.00);',
+        '**PRIMAGEL S.r.l.** (Aragona) – commercio all’ingrosso di prodotti alimentari (ATECO 46.39.00); 5-10 milioni;',
+        '**ARGO.GEL S.r.l.** (Aragona) – commercio all’ingrosso di prodotti alimentari (ATECO 46.39.00);',
+        '**TANOGEL di Gaetano Mario Di Vincenzo** (Santa Elisabetta) – commercio all’ingrosso di prodotti surgelati (ATECO 46.39.10);',
+        '**F.LLI FRAGAPANE di Fragapane Francesco e C. S.n.c.** (Santa Elisabetta) – commercio all’ingrosso di prodotti alimentari (ATECO 46.39.00);',
+        '**GUSTO SICANO S.r.l. Società Benefit** (Joppolo Giancaxio) – commercio di prodotti alimentari tipici (ATECO 47.27.90);',
+        '**A.C.I.M. S.r.l. Società Agricola** (Sant’Angelo Muxaro) – attività agricola (ATECO 01.48.10);',
+        '**D’ANNA GIOVANNA Impresa Agricola** (Joppolo Giancaxio) – attività agricola;',
+        '**Azienda agricola Terrazzino** (Raffadali) – mandorle, olive, olio e uva da vino;',
+        '**Azienda agricola Vizzì Vincenzo** (Raffadali) – produzioni agricole, via F 23 n. 9;',
+        '**CaruanaFruit** (Raffadali) – azienda agricola, agrumi e olio, vendita diretta e online;',
+        '**Vinti Rag. Baldassare** (Raffadali) – commercio e riparazione di macchine agricole, via Porta Agrigento 98;',
+        '**Rizzo Domenico** (Raffadali) – commercio e riparazione di macchine agricole, via Cuneo 1/P.',
     ]),
-    ('Raffadali', '11.769 abitanti · 117 imprese registrate · circa 4 km da Santa Elisabetta', [
-        '**LE CUSPIDI S.r.l.** – bar, pasticceria e gelateria, attiva dal 1960 e specializzata nella lavorazione del pistacchio di Raffadali (ATECO 56.10.30); 5-10 milioni;',
-        '**DI STEFANO DOLCIARIA S.r.l.** – industria dolciaria (ATECO 10.72.00); 2-5 milioni;',
-        '**L’ANTICO FORNO S.a.s. di Galvano Gianluca e Cuffaro Vincenza & C.** – produzione di prodotti di panetteria freschi (ATECO 10.71.10);',
-        '**Panificio Criscenti** – panificazione, via Tivoli 19;',
-        '**F.lli Criscenti di Criscenti Francesco e Calogero S.n.c.** – panificazione e pasticceria;',
-        '**Excelsior S.n.c. di Tarallo Luigi** – panificio e pasticceria;',
-        '**Pasticceria Lionti** – pasticceria artigianale, produzione fresca e secca;',
-        '**LA MANDORLA di Curaba & Gentile S.r.l.** – commercio all’ingrosso di frutta e ortaggi (ATECO 46.31.00);',
-        '**F.LLI CUFFARO S.r.l.** – commercio all’ingrosso di frutta e ortaggi (ATECO 46.31.10); 2-5 milioni;',
-        '**Azienda agricola Terrazzino** – mandorle, olive, olio e uva da vino;',
-        '**Azienda agricola Vizzì Vincenzo** – produzioni agricole, via F 23 n. 9;',
-        '**CaruanaFruit** – azienda agricola, agrumi e olio, vendita diretta e online;',
-        '**Vinti Rag. Baldassare** – commercio e riparazione di macchine agricole, via Porta Agrigento 98;',
-        '**Rizzo Domenico** – commercio e riparazione di macchine agricole, via Cuneo 1/P;',
-        '**MATTANA S.r.l.** – commercio all’ingrosso (ATECO 46.30.00); 10-25 milioni;',
-        '**ERANA AUT.CARB. S.r.l.** – trasporto di merci su strada (ATECO 49.41.00); 10-25 milioni;',
-        '**F.LLI CAMILLERI & ARGENTO S.r.l.** – trasporto di passeggeri (ATECO 49.31.00);',
-        '**G.R. MARKET S.r.l.** – commercio al dettaglio alimentare (ATECO 47.11.00);',
-        '**FADIS S.r.l.** – commercio al dettaglio in esercizi non specializzati (ATECO 47.11.02); 2-5 milioni;',
-        '**MILISCIA S.r.l.** – commercio all’ingrosso non specializzato (ATECO 46.39.00);',
-        '**EURORAPPRESENTANZE VENDING S.r.l.** – commercio e distribuzione automatica (ATECO 47.10.00); 5-10 milioni;',
-        '**START OFF S.r.l.** – commercio al dettaglio di elettrodomestici (ATECO 47.54.00);',
-        '**BARTOLOMEO ITALIAN DESIGN S.r.l.** – commercio al dettaglio di mobili (ATECO 47.55.10); 1-2 milioni;',
-        '**ROSS GROUP S.r.l.** – commercio al dettaglio di abbigliamento e calzature (ATECO 47.72.10); 1-2 milioni;',
-        '**INTIMO IN S.r.l.s.** – commercio al dettaglio di abbigliamento (ATECO 47.71.30);',
-        '**DIFFUSIONE EDITORIALE AGRIGENTINA S.r.l.** – commercio all’ingrosso di libri e riviste (ATECO 46.49.20);',
-        '**EDIL F.G.M. S.r.l.** – commercio di materiali da costruzione; 2-5 milioni;',
-        '**BRUNO & FRETTO S.r.l.** – costruzione di edifici (ATECO 41.00.00); 1-2 milioni;',
-        '**DF INFISSI S.r.l.** – fabbricazione di serramenti metallici (ATECO 25.12.10); 1-2 milioni;',
-        '**MED CART GALVANO S.r.l.** – fabbricazione di carta e imballaggi (ATECO 17.21.00); 2-5 milioni;',
-        '**TEKA S.r.l.** – attività manifatturiera e di recupero (ATECO 32.50.11);',
-        '**SANITARIA DELFINO Società Cooperativa Sociale** – assistenza sociale non residenziale (ATECO 88.10.00); 5-10 milioni;',
-        '**Società Cooperativa Sociale IL SORRISO** – servizi di supporto alle attività amministrative (ATECO 82.10.00);',
-        '**Marlò Beef Bar** – ristorazione, via Cordova 34;',
-        '**Ristorante Dang Giapponese e Cinese** – ristorazione, via F22 n. 28;',
-        '**That’s Amore Pizzeria** – pizzeria, via F 16 n. 12;',
-        '**Pizzeria Mistick Pizza2** – pizzeria, piazza Progresso 38;',
-        '**Metabirrificio Il Mangione** – birrificio e ristorazione, contrada Modaccamo 800;',
-        '**Movida Cocktails Club** – bar e intrattenimento, piazza Progresso;',
-        '**Colletto Giuseppe** – ristorazione, via F 1 n. 2;',
-        '**MONDOFREE** – strutture ricettive per brevi soggiorni (ATECO 55.20.40).',
+
+    ('Ristorazione, panificazione e pasticceria', [
+        '**LE CUSPIDI S.r.l.** (Raffadali) – bar, pasticceria e gelateria, attiva dal 1960 e specializzata nella lavorazione del pistacchio di Raffadali (ATECO 56.10.30); 5-10 milioni;',
+        '**L’ANTICO FORNO S.a.s. di Galvano Gianluca e Cuffaro Vincenza & C.** (Raffadali) – produzione di prodotti di panetteria freschi (ATECO 10.71.10);',
+        '**Panificio Criscenti** (Raffadali) – panificazione, via Tivoli 19;',
+        '**F.lli Criscenti di Criscenti Francesco e Calogero S.n.c.** (Raffadali) – panificazione e pasticceria;',
+        '**Excelsior S.n.c. di Tarallo Luigi** (Raffadali) – panificio e pasticceria;',
+        '**Pasticceria Lionti** (Raffadali) – pasticceria artigianale, produzione fresca e secca;',
+        '**Pasticceria Bar Europa di Angelo Miccichè** (Aragona) – pasticceria e bar, via Roma 187;',
+        '**Terra Dunci** (Aragona) – panificazione artigianale, gastronomia e dolci;',
+        '**S.I.S. Società Italiana Servizi S.r.l.** (Joppolo Giancaxio) – ristorazione con somministrazione (ATECO 56.11.11); 1-2 milioni;',
+        '**RIZZO GAETANO** (Santa Elisabetta) – bar ed esercizi simili (ATECO 56.30.00);',
+        '**Ristorante Pizzeria Kometa** (Santa Elisabetta) – ristorazione, contrada Merceri;',
+        '**Marlò Beef Bar** (Raffadali) – ristorazione, via Cordova 34;',
+        '**Ristorante Dang Giapponese e Cinese** (Raffadali) – ristorazione, via F22 n. 28;',
+        '**That’s Amore Pizzeria** (Raffadali) – pizzeria, via F 16 n. 12;',
+        '**Pizzeria Mistick Pizza2** (Raffadali) – pizzeria, piazza Progresso 38;',
+        '**Metabirrificio Il Mangione** (Raffadali) – birrificio e ristorazione, contrada Modaccamo 800;',
+        '**Movida Cocktails Club** (Raffadali) – bar e intrattenimento, piazza Progresso;',
+        '**Colletto Giuseppe** (Raffadali) – ristorazione, via F 1 n. 2.',
     ]),
-    ('Aragona', '8.669 abitanti · 128 imprese registrate', [
-        '**SICILY FOOD S.r.l.** – lavorazione e conservazione di prodotti ittici (ATECO 10.20.00); 25-50 milioni, la maggiore impresa manifatturiera del perimetro;',
-        '**MANCUSO VINCENZO & C. S.r.l.** – produzione di gelati (ATECO 10.52.00); 10-25 milioni;',
-        '**MANGIMIFICIO S. ANTONIO S.r.l.** – produzione di prodotti per l’alimentazione degli animali (ATECO 10.90.00); 5-10 milioni;',
-        '**PRIMAGEL S.r.l.** – commercio all’ingrosso di prodotti alimentari (ATECO 46.39.00); 5-10 milioni;',
-        '**ARGO.GEL S.r.l.** – commercio all’ingrosso di prodotti alimentari (ATECO 46.39.00);',
-        '**Pasticceria Bar Europa di Angelo Miccichè** – pasticceria e bar, via Roma 187;',
-        '**Terra Dunci** – panificazione artigianale, gastronomia e dolci;',
-        '**LA PORTA INDUSTRIES S.r.l.** – fabbricazione di strutture metalliche (ATECO 25.11.00); 5-10 milioni;',
-        '**AIRCOM S.r.l.** – fabbricazione di serramenti metallici (ATECO 25.12.10); 5-10 milioni;',
-        '**ITALSERRAMENTI S.r.l.** – fabbricazione di serramenti metallici (ATECO 25.12.10);',
-        '**TECNO EDIL S.r.l.** – fabbricazione di serramenti metallici (ATECO 25.12.10); 2-5 milioni;',
-        '**SITAL S.r.l.** – fabbricazione di serramenti metallici (ATECO 25.12.10); 2-5 milioni;',
-        '**IMPRETECH S.r.l.** – costruzione di opere di ingegneria civile (ATECO 42.99.00);',
-        '**OMNISERVICE ENGINEERING S.r.l.** – costruzione di edifici (ATECO 41.00.00);',
-        '**EURODEMOLIZIONI S.r.l.** – demolizioni e trattamento dei rifiuti (ATECO 38.21.20); 5-10 milioni;',
-        '**ISEDA S.r.l.** – raccolta di rifiuti non pericolosi (ATECO 38.11.00); 10-25 milioni;',
-        '**S.E.A.P. – Società Europea Appalti Pubblici S.r.l.** – raccolta di rifiuti non pericolosi (ATECO 38.11.00); 10-25 milioni;',
-        '**TUTELA AMBIENTE S.r.l.** – raccolta di rifiuti non pericolosi (ATECO 38.11.00); 1-2 milioni;',
-        '**UNIPLAST SICILIA Società Cooperativa** – fabbricazione di imballaggi in materie plastiche (ATECO 22.22.00); 1-2 milioni;',
-        '**MEDICAL GAS CRIOGENICI S.r.l.** – fabbricazione di apparecchi medicali (ATECO 26.60.01); 2-5 milioni;',
-        '**HERBEKA S.r.l.** – commercio all’ingrosso di prodotti farmaceutici (ATECO 46.46.00);',
-        '**COVERI CL S.r.l.** – commercio all’ingrosso di metalli (ATECO 46.72.00); 1-2 milioni;',
-        '**F.LLI COLUZZI di Coluzzi Giovanni e Coluzzi Davide S.n.c.** – riparazione di carrozzerie (ATECO 45.20.20);',
-        '**PENTA SERVIZI S.r.l.** – servizi di supporto alle imprese (ATECO 82.20.00); 2-5 milioni;',
-        '**SAR CONSULTING S.r.l.** – consulenza imprenditoriale (ATECO 70.20.09); 2-5 milioni;',
-        '**EUROFORM** – corsi di formazione e aggiornamento professionale (ATECO 85.59.20), possibile interlocutore anche quale ente formativo.',
+
+    ('Turismo, ricettività e servizi al territorio', [
+        '**VAL DI KAM S.r.l.s.** (Sant’Angelo Muxaro) – servizi turistici e di prenotazione (ATECO 79.90.04), operatore di riferimento per il turismo rurale dei Sicani;',
+        '**The Arabian Horse Ranch** (Santa Elisabetta) – ristorazione e turismo equestre, contrada Carbonio 6;',
+        '**MONDOFREE** (Raffadali) – strutture ricettive per brevi soggiorni (ATECO 55.20.40).',
     ]),
-    ('Joppolo Giancaxio', '1.064 abitanti · 9 imprese registrate', [
-        '**S.I.S. Società Italiana Servizi S.r.l.** – ristorazione con somministrazione (ATECO 56.11.11); 1-2 milioni;',
-        '**GUSTO SICANO S.r.l. Società Benefit** – commercio di prodotti alimentari tipici (ATECO 47.27.90);',
-        '**D’ANNA GIOVANNA Impresa Agricola** – attività agricola;',
-        '**GIGLIONE SERVIZI ECOLOGICI S.r.l.** – attività di risanamento e servizi ecologici (ATECO 38.30.00); 2-5 milioni;',
-        '**T.I.M.E.T.I.C. S.r.l.** – costruzione di edifici (ATECO 41.00.00);',
-        '**ATHENA BUS VIAGGI S.r.l.** – trasporto di passeggeri e noleggio autobus (ATECO 49.30.00);',
-        '**FRENDA GROUP S.r.l.** – commercio all’ingrosso non specializzato (ATECO 46.90.00); 1-2 milioni;',
-        '**BARTOLOMEO ARREDA 2.0 S.r.l.** – commercio al dettaglio di mobili (ATECO 47.55.10); 2-5 milioni;',
-        '**ARCHIDESIGN S.r.l. Semplificata** – commercio al dettaglio di articoli per l’arredamento (ATECO 47.53.20).',
+
+    ('Edilizia, impiantistica e carpenteria metallica', [
+        '**LA PORTA INDUSTRIES S.r.l.** (Aragona) – fabbricazione di strutture metalliche (ATECO 25.11.00); 5-10 milioni;',
+        '**AIRCOM S.r.l.** (Aragona) – fabbricazione di serramenti metallici (ATECO 25.12.10); 5-10 milioni;',
+        '**ITALSERRAMENTI S.r.l.** (Aragona) – fabbricazione di serramenti metallici (ATECO 25.12.10);',
+        '**TECNO EDIL S.r.l.** (Aragona) – fabbricazione di serramenti metallici (ATECO 25.12.10); 2-5 milioni;',
+        '**SITAL S.r.l.** (Aragona) – fabbricazione di serramenti metallici (ATECO 25.12.10); 2-5 milioni;',
+        '**DF INFISSI S.r.l.** (Raffadali) – fabbricazione di serramenti metallici (ATECO 25.12.10); 1-2 milioni;',
+        '**MILITELLO COSTRUZIONI S.r.l.** (Santa Elisabetta) – installazione di impianti elettrici (ATECO 43.21.01); 2-5 milioni;',
+        '**CATUARA DAMIANO SALVATORE** (Santa Elisabetta) – costruzione di edifici (ATECO 41.20.00);',
+        '**BRUNO & FRETTO S.r.l.** (Raffadali) – costruzione di edifici (ATECO 41.00.00); 1-2 milioni;',
+        '**EDIL F.G.M. S.r.l.** (Raffadali) – commercio di materiali da costruzione; 2-5 milioni;',
+        '**IMPRETECH S.r.l.** (Aragona) – costruzione di opere di ingegneria civile (ATECO 42.99.00);',
+        '**OMNISERVICE ENGINEERING S.r.l.** (Aragona) – costruzione di edifici (ATECO 41.00.00);',
+        '**T.I.M.E.T.I.C. S.r.l.** (Joppolo Giancaxio) – costruzione di edifici (ATECO 41.00.00).',
     ]),
-    ('Sant’Angelo Muxaro', '1.119 abitanti · 6 imprese registrate', [
-        '**A.C.I.M. S.r.l. Società Agricola** – attività agricola (ATECO 01.48.10);',
-        '**VAL DI KAM S.r.l.s.** – servizi turistici e di prenotazione (ATECO 79.90.04), operatore di riferimento per il turismo rurale dei Sicani;',
-        '**FARMACIA SCIMONELLI S.r.l.** – farmacia (ATECO 47.73.10);',
-        '**DMOTORS S.r.l.** – commercio di autoveicoli (ATECO 47.81.10);',
-        '**CIMINO RAFFAELE** – commercio al dettaglio ambulante (ATECO 47.59.10);',
-        '**PRAKCINT S.r.l.s.** – commercio al dettaglio in esercizi non specializzati (ATECO 47.10.00).',
+
+    ('Commercio e distribuzione', [
+        '**MATTANA S.r.l.** (Raffadali) – commercio all’ingrosso (ATECO 46.30.00); 10-25 milioni;',
+        '**F.LLI FRAGAPANE S.r.l.** (Santa Elisabetta) – commercio all’ingrosso di bevande (ATECO 46.34.10); 2-5 milioni;',
+        '**FADIS S.r.l.** (Raffadali) – commercio al dettaglio in esercizi non specializzati (ATECO 47.11.02); 2-5 milioni;',
+        '**FP MARKET S.r.l.** (Santa Elisabetta) – commercio al dettaglio alimentare, supermercato (ATECO 47.11.40);',
+        '**G.R. MARKET S.r.l.** (Raffadali) – commercio al dettaglio alimentare (ATECO 47.11.00);',
+        '**MILISCIA S.r.l.** (Raffadali) – commercio all’ingrosso non specializzato (ATECO 46.39.00);',
+        '**EURORAPPRESENTANZE VENDING S.r.l.** (Raffadali) – commercio e distribuzione automatica (ATECO 47.10.00); 5-10 milioni;',
+        '**START OFF S.r.l.** (Raffadali) – commercio al dettaglio di elettrodomestici (ATECO 47.54.00);',
+        '**BARTOLOMEO ITALIAN DESIGN S.r.l.** (Raffadali) – commercio al dettaglio di mobili (ATECO 47.55.10); 1-2 milioni;',
+        '**BARTOLOMEO ARREDA 2.0 S.r.l.** (Joppolo Giancaxio) – commercio al dettaglio di mobili (ATECO 47.55.10); 2-5 milioni;',
+        '**ARCHIDESIGN S.r.l. Semplificata** (Joppolo Giancaxio) – commercio al dettaglio di articoli per l’arredamento (ATECO 47.53.20);',
+        '**ROSS GROUP S.r.l.** (Raffadali) – commercio al dettaglio di abbigliamento e calzature (ATECO 47.72.10); 1-2 milioni;',
+        '**INTIMO IN S.r.l.s.** (Raffadali) – commercio al dettaglio di abbigliamento (ATECO 47.71.30);',
+        '**DIFFUSIONE EDITORIALE AGRIGENTINA S.r.l.** (Raffadali) – commercio all’ingrosso di libri e riviste (ATECO 46.49.20);',
+        '**HERBEKA S.r.l.** (Aragona) – commercio all’ingrosso di prodotti farmaceutici (ATECO 46.46.00);',
+        '**COVERI CL S.r.l.** (Aragona) – commercio all’ingrosso di metalli (ATECO 46.72.00); 1-2 milioni;',
+        '**FRENDA GROUP S.r.l.** (Joppolo Giancaxio) – commercio all’ingrosso non specializzato (ATECO 46.90.00); 1-2 milioni;',
+        '**DMOTORS S.r.l.** (Sant’Angelo Muxaro) – commercio di autoveicoli (ATECO 47.81.10);',
+        '**PRAKCINT S.r.l.s.** (Sant’Angelo Muxaro) – commercio al dettaglio in esercizi non specializzati (ATECO 47.10.00);',
+        '**CIMINO RAFFAELE** (Sant’Angelo Muxaro) – commercio al dettaglio ambulante (ATECO 47.59.10).',
     ]),
+
+    ('Trasporti e logistica', [
+        '**ERANA AUT.CARB. S.r.l.** (Raffadali) – trasporto di merci su strada (ATECO 49.41.00); 10-25 milioni;',
+        '**TABONE TRASPORTI S.r.l.** (Santa Elisabetta) – trasporto di merci su strada (ATECO 49.41.00); 1-2 milioni;',
+        '**F.LLI CAMILLERI & ARGENTO S.r.l.** (Raffadali) – trasporto di passeggeri (ATECO 49.31.00);',
+        '**AUTOSERVIZI di Fragapane Pietro & C. S.n.c.** (Santa Elisabetta) – trasporto terrestre di passeggeri (ATECO 49.39.09);',
+        '**ATHENA BUS VIAGGI S.r.l.** (Joppolo Giancaxio) – trasporto di passeggeri e noleggio autobus (ATECO 49.30.00).',
+    ]),
+
+    ('Servizi ambientali e igiene urbana', [
+        '**ISEDA S.r.l.** (Aragona) – raccolta di rifiuti non pericolosi (ATECO 38.11.00); 10-25 milioni;',
+        '**S.E.A.P. – Società Europea Appalti Pubblici S.r.l.** (Aragona) – raccolta di rifiuti non pericolosi (ATECO 38.11.00); 10-25 milioni;',
+        '**TUTELA AMBIENTE S.r.l.** (Aragona) – raccolta di rifiuti non pericolosi (ATECO 38.11.00); 1-2 milioni;',
+        '**EURODEMOLIZIONI S.r.l.** (Aragona) – demolizioni e trattamento dei rifiuti (ATECO 38.21.20); 5-10 milioni;',
+        '**GIGLIONE SERVIZI ECOLOGICI S.r.l.** (Joppolo Giancaxio) – attività di risanamento e servizi ecologici (ATECO 38.30.00); 2-5 milioni.',
+    ]),
+
+    ('Servizi alla persona e comparto socio-sanitario', [
+        '**SANITARIA DELFINO Società Cooperativa Sociale** (Raffadali) – assistenza sociale non residenziale (ATECO 88.10.00); 5-10 milioni;',
+        '**Società Cooperativa Sociale IL SORRISO** (Raffadali) – servizi di supporto alle attività amministrative (ATECO 82.10.00);',
+        '**MEDICAL GAS CRIOGENICI S.r.l.** (Aragona) – fabbricazione di apparecchi medicali (ATECO 26.60.01); 2-5 milioni;',
+        '**CENTRO DENTALE TABUSO S.r.l.** (Santa Elisabetta) – studio odontoiatrico (ATECO 86.23.00);',
+        '**FARMACIA FRAGAPANE MIRELLA** (Santa Elisabetta) – farmacia (ATECO 47.73.00);',
+        '**FARMACIA SCIMONELLI S.r.l.** (Sant’Angelo Muxaro) – farmacia (ATECO 47.73.10).',
+    ]),
+
+    ('Artigianato, manifattura e servizi alle imprese', [
+        '**MED CART GALVANO S.r.l.** (Raffadali) – fabbricazione di carta e imballaggi (ATECO 17.21.00); 2-5 milioni;',
+        '**UNIPLAST SICILIA Società Cooperativa** (Aragona) – fabbricazione di imballaggi in materie plastiche (ATECO 22.22.00); 1-2 milioni;',
+        '**TEKA S.r.l.** (Raffadali) – attività manifatturiera e di recupero (ATECO 32.50.11);',
+        '**CARROZZERIA F.LLI LOMBARDO S.n.c.** (Santa Elisabetta) – riparazione di carrozzerie di autoveicoli (ATECO 45.20.20);',
+        '**F.LLI COLUZZI di Coluzzi Giovanni e Coluzzi Davide S.n.c.** (Aragona) – riparazione di carrozzerie (ATECO 45.20.20);',
+        '**LA ROSA L’ARTE DELLA CERA S.r.l.s.** (Santa Elisabetta) – produzione e commercio di articoli in cera (ATECO 46.49.90);',
+        '**PENTA SERVIZI S.r.l.** (Aragona) – servizi di supporto alle imprese (ATECO 82.20.00); 2-5 milioni;',
+        '**SAR CONSULTING S.r.l.** (Aragona) – consulenza imprenditoriale (ATECO 70.20.09); 2-5 milioni;',
+        '**MILITELLO GIUSEPPE** (Santa Elisabetta) – elaborazione elettronica dei dati (ATECO 63.11.10);',
+        '**EUROFORM** (Aragona) – corsi di formazione e aggiornamento professionale (ATECO 85.59.20), possibile interlocutore anche quale ente formativo.',
+    ]),
+]
+
+# ripartizione territoriale, per la nota di sintesi
+PER_COMUNE = [
+    ('Santa Elisabetta', '2.208 abitanti', '13 imprese registrate', 16),
+    ('Raffadali', '11.769 abitanti', '117 imprese registrate', 41),
+    ('Aragona', '8.669 abitanti', '128 imprese registrate', 26),
+    ('Joppolo Giancaxio', '1.064 abitanti', '9 imprese registrate', 9),
+    ('Sant’Angelo Muxaro', '1.119 abitanti', '6 imprese registrate', 6),
 ]
 
 RETE = [
@@ -127,8 +157,12 @@ RETE = [
 ]
 
 if __name__ == '__main__':
-    tot = 0
-    for nome, sub, voci in COMUNI:
-        print(f'{nome:22} {len(voci):3d}')
+    tot = ateco = 0
+    for nome, voci in SETTORI:
+        c = sum(1 for v in voci if 'ATECO' in v)
+        print(f'{nome:48} {len(voci):3d} voci | ATECO {c:3d}')
         tot += len(voci)
-    print(f'{"TOTALE":22} {tot:3d}')
+        ateco += c
+    print(f'{"TOTALE":48} {tot:3d} voci | ATECO {ateco:3d}')
+    assert tot == sum(n for *_, n in PER_COMUNE), 'totale settori ≠ totale comuni'
+    print('coerenza settori/comuni: ok')

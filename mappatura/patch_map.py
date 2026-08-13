@@ -7,7 +7,7 @@ import sys
 from xml.sax.saxutils import escape
 
 sys.path.insert(0, '..')
-from imprese import COMUNI, RETE
+from imprese import SETTORI, PER_COMUNE, RETE
 
 DOC = 'word/document.xml'
 
@@ -71,7 +71,8 @@ def h2(text):
             + run(text, RPR_H2) + '</w:p>')
 
 
-TOT = sum(len(v) for _, _, v in COMUNI)
+TOT = sum(len(v) for _, v in SETTORI)
+CON_ATECO = sum(1 for _, v in SETTORI for x in v if 'ATECO' in x)
 
 # ---------------------------------------------------------------- costruzione
 xml = []
@@ -102,15 +103,21 @@ xml.append(body(
     'comprende in prevalenza società di capitali e di persone, mentre il numero di **attività censite** nel presente '
     'paragrafo include anche esercizi commerciali e di ristorazione rilevati da altri repertori: per i comuni di minore '
     'dimensione il secondo valore può pertanto risultare superiore al primo.'))
+ripartizione = '; '.join(f'{nome} {n}' for nome, _, _, n in PER_COMUNE)
 xml.append(body(
     f'Si riporta di seguito la ricognizione di **{TOT} imprese e attività** del perimetro di prossimità, ordinate per '
-    'comune e, all’interno di ciascun comune, per comparto di appartenenza. La selezione privilegia i settori a maggiore '
-    'potenziale di inserimento per i beneficiari — agroalimentare, ristorazione e panificazione, agricoltura, edilizia e '
-    'impiantistica, commercio e logistica, servizi ambientali e alla persona. L’elenco non ha carattere esaustivo e '
-    'costituisce una **base di scouting** da verificare presso la Camera di Commercio prima di ogni contatto operativo.'))
+    f'comparto economico secondo la tassonomia adottata al capitolo 4 e con indicazione, per ciascuna, del comune di '
+    f'insediamento. La ripartizione territoriale è la seguente: {ripartizione}. La selezione privilegia i settori a '
+    'maggiore potenziale di inserimento per i beneficiari. L’elenco non ha carattere esaustivo e costituisce una '
+    '**base di scouting** da verificare presso la Camera di Commercio prima di ogni contatto operativo.'))
+xml.append(body(
+    f'Per **{CON_ATECO} delle {TOT} posizioni** sono riportati il codice ATECO e la classe di fatturato, tratti dalla '
+    'banca dati camerale. Per le restanti — in prevalenza esercizi di ristorazione, panificazione e pasticceria e '
+    'aziende agricole rilevati da repertori commerciali — tali informazioni non risultano disponibili alla fonte e non '
+    'sono state attribuite; se ne indicano denominazione, attività e, ove nota, l’ubicazione.'))
 
-for nome, sub, voci in COMUNI:
-    xml.append(body(f'**{nome}** ({sub}) — {len(voci)} attività censite:'))
+for nome, voci in SETTORI:
+    xml.append(body(f'**{nome}** — {len(voci)} attività censite:'))
     for v in voci:
         xml.append(bullet(v))
 
@@ -189,5 +196,6 @@ s = s.replace(ANCHOR, NEW + ANCHOR)
 
 open(DOC, 'w', encoding='utf-8').write(s)
 
-print(f'inserite {TOT} attività su {len(COMUNI)} comuni + {len(RETE)} soggetti già in rete')
+print(f'inserite {TOT} attività ({CON_ATECO} con ATECO) su {len(SETTORI)} comparti '
+      f'e {len(PER_COMUNE)} comuni + {len(RETE)} soggetti già in rete')
 print('nuovi paragrafi:', len(xml))
