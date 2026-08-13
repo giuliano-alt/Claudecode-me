@@ -72,7 +72,8 @@ def h2(text):
 
 
 TOT = sum(len(v) for _, v in SETTORI)
-CON_ATECO = sum(1 for _, v in SETTORI for x in v if 'ATECO' in x)
+CON_IND = sum(1 for _, v in SETTORI for x in v
+              if any(k in x for k in (', via ', ', piazza ', ', contrada ', ', corso ')))
 
 # ---------------------------------------------------------------- costruzione
 xml = []
@@ -111,10 +112,11 @@ xml.append(body(
     'maggiore potenziale di inserimento per i beneficiari. L’elenco non ha carattere esaustivo e costituisce una '
     '**base di scouting** da verificare presso la Camera di Commercio prima di ogni contatto operativo.'))
 xml.append(body(
-    f'Per **{CON_ATECO} delle {TOT} posizioni** sono riportati il codice ATECO e la classe di fatturato, tratti dalla '
-    'banca dati camerale. Per le restanti — in prevalenza esercizi di ristorazione, panificazione e pasticceria e '
-    'aziende agricole rilevati da repertori commerciali — tali informazioni non risultano disponibili alla fonte e non '
-    'sono state attribuite; se ne indicano denominazione, attività e, ove nota, l’ubicazione.'))
+    'Per ciascuna posizione sono indicati denominazione, comune di insediamento e attività esercitata. '
+    f'L’**indirizzo è riportato per {CON_IND} delle {TOT} posizioni**, quelle per cui risulta rilevato da fonte diretta: '
+    'la banca dati camerale non espone l’ubicazione nelle pagine di elenco e per le restanti posizioni il dato va '
+    'acquisito mediante visura camerale, che restituisce la sede legale in forma certificata. Non sono stati attribuiti '
+    'indirizzi per inferenza.'))
 
 for nome, voci in SETTORI:
     xml.append(body(f'**{nome}** — {len(voci)} attività censite:'))
@@ -125,9 +127,9 @@ xml.append(body(
     f'La ricognizione censisce complessivamente **{TOT} attività** distribuite su cinque comuni. Sul piano delle '
     'opportunità di inserimento, quattro elementi meritano attenzione. Il primo è la consistenza del comparto '
     '**agroalimentare e della panificazione**: fra industria dolciaria, panifici, pasticcerie e lavorazione dei prodotti '
-    'ittici il perimetro esprime una filiera completa, che comprende imprese di dimensione industriale — con classi di '
-    'fatturato fino a 25-50 milioni di euro — dotate di una struttura organizzativa in grado di gestire tirocini in modo '
-    'continuativo, diversamente dalla microimpresa prevalente.'))
+    'ittici il perimetro esprime una filiera completa, che comprende anche imprese di dimensione industriale, dotate di '
+    'una struttura organizzativa in grado di gestire tirocini in modo continuativo, diversamente dalla microimpresa '
+    'prevalente.'))
 xml.append(body(
     'Il secondo è la **densità della ristorazione a Raffadali**, che con oltre dieci fra ristoranti, pizzerie, bar e '
     'birrifici costituisce il comparto più accessibile in termini di competenze formali richieste e il più prossimo alla '
@@ -169,9 +171,9 @@ xml.append(body(
 xml.append(body_italic(
     'Fonti dei dati d’impresa: banca dati Aziende.it su base Registro Imprese; Virgilio Aziende e PagineGialle per gli '
     'esercizi di ristorazione, panificazione e pasticceria; ricognizione web condotta nell’agosto 2026. Dati demografici '
-    'ISTAT al 1° gennaio 2026. Ragioni sociali, codici ATECO, classi di fatturato e recapiti vanno verificati presso la '
-    'Camera di Commercio di Agrigento prima di ogni utilizzo in sede di rendicontazione o di contatto formale con le '
-    'imprese; l’elenco può contenere posizioni cessate o variate.'))
+    'ISTAT al 1° gennaio 2026. Ragioni sociali, indirizzi e recapiti vanno verificati presso la Camera di Commercio di '
+    'Agrigento prima di ogni utilizzo in sede di rendicontazione o di contatto formale con le imprese; l’elenco può '
+    'contenere posizioni cessate o variate.'))
 
 NEW = ''.join(xml)
 
@@ -196,6 +198,6 @@ s = s.replace(ANCHOR, NEW + ANCHOR)
 
 open(DOC, 'w', encoding='utf-8').write(s)
 
-print(f'inserite {TOT} attività ({CON_ATECO} con ATECO) su {len(SETTORI)} comparti '
+print(f'inserite {TOT} attività ({CON_IND} con indirizzo) su {len(SETTORI)} comparti '
       f'e {len(PER_COMUNE)} comuni + {len(RETE)} soggetti già in rete')
 print('nuovi paragrafi:', len(xml))
